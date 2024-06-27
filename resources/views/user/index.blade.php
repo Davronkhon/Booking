@@ -17,22 +17,20 @@
     <table class="table">
         <tr>
             <th>#</th>
-            <th>Заголовок</th>
-            <th>Рисунок</th>
-            <th>Категория</th>
-            <th>Дата создания</th>
-            <th>Дата изменения</th>
+            <th>UserName</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th>Email</th>
             <th>Удалить</th>
             <th>Изменить</th>
         </tr>
-        @foreach($all_user as $user)
+        @foreach($users as $user)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{$user->title}}</td>
-                <td>{{$user->image}}</td>
-                <td>{{$user->category->name}}</td>
-                <td>{{$user->category_id}}</td>
-                <td>{{$user->update_at}}</td>
+                <td>{{$user->username}}</td>
+                <td>{{$user->password}}</td>
+                <td>{{$user->role}}</td>
+                <td>{{$user->email}}</td>
                 <td>
                     <form action="{{route('user.destroy', $user->id)}}" method="post">
                         @csrf

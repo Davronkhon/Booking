@@ -25,15 +25,15 @@
             <th>Удалить</th>
             <th>Изменить</th>
         </tr>
-        @foreach($all_client as $client)
+        @foreach($clients as $client)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$client->name}}</td>
                 <td>{{$client->surname}}</td>
                 <td>{{$client->phone}}</td>
                 <td>{{$client->user->name}}</td>
-                <td>{{$booking->restaurant->name}}</td>
-                <td>{{$booking->update_at}}</td>
+                <td>{{$client->restaurant->name}}</td>
+                <td>{{$client->update_at}}</td>
                 <td>
                     <form action="{{route('clients.destroy', $client->id)}}" method="post">
                         @csrf

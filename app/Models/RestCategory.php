@@ -9,9 +9,4 @@ class RestCategory extends Model
 {
     use HasFactory;
     protected $fillable = ['name', 'description'];
-
-    public function restaurants()
-    {
-        return $this->hasMany(Restaurant::class, 'rest_category_id');
-    }
 }

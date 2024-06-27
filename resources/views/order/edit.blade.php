@@ -1,9 +1,9 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Редактировать бронирование #{{ $booking->id }}</h3>
+            <h3 class="card-title">Редактировать бронирование #{{ $order->id }}</h3>
         </div>
         <div class="card-body">
             @if ($errors->any())
@@ -15,15 +15,15 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('booking.update', $booking->id) }}" method="POST">
+            <form action="{{ route('order.update', $order->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <label for="">Quantity</label>
-                <input type="text" class="form-control" id="" name="quantity" value="{{$booking->quantity}}">
+                <input type="text" class="form-control" id="" name="quantity" value="{{$order->quantity}}">
                 <label for="">Order_dat</label>
-                <input type="date" class="form-control" id="" name="orderdat" value="{{$booking->orderdat}}">
+                <input type="date" class="form-control" id="" name="orderdat" value="{{$order->orderdat}}">
                 <label for="">Status</label>
-                <input type="text" class="form-control" id="" name="status" value="{{$booking->status}}">
+                <input type="text" class="form-control" id="" name="status" value="{{$order->status}}">
                 <label for="">Booking_id : </label>
                 <select name="booking_id" id="" class="form-control">
                     @foreach($bookings as $booking)

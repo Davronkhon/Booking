@@ -26,7 +26,7 @@
             <th>Удалить</th>
             <th>Изменить</th>
         </tr>
-        @foreach($all_booking as $booking)
+        @foreach($bookings as $booking)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$booking->start}}</td>

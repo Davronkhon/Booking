@@ -11,7 +11,7 @@
                 {{session('message')}}
             </div>
         @endif
-        <form action="{{route('order.story')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('order.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="">Заголовок : </label>
             <input type="text" name="title" class="form-control">

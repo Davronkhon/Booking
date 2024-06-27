@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.app')
 @section('title')
     <h3>Таблица foods</h3>
 @endsection
@@ -38,7 +38,7 @@
                     </form>
                 </td>
                 <td>
-                    <form action="{{route('$food.edit', $food->id)}}" method="get">
+                    <form action="{{route('food.edit', $food->id)}}" method="get">
                         @csrf
                         <input type="submit" value="update" class="btn btn-info">
                     </form>

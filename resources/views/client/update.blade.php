@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <div class="card">
@@ -15,20 +15,20 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('admin.clients.update', $clients->id) }}" method="POST">
+            <form action="{{ route('clients.update', $clients->id) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="form-group">
                     <label for="date">Name:</label>
-                    <input type="date" class="form-control" name="name" value="{{$clients->name}}">
+                    <input type="date" class="form-control" name="name" value="{{$client->name}}">
                 </div>
                 <div class="form-group">
                     <label for="time">Surname:</label>
-                    <input type="time" class="form-control" name="surname" value="{{$clients->surname}}">
+                    <input type="time" class="form-control" name="surname" value="{{$client->surname}}">
                 </div>
                 <div class="form-group">
                     <label for="seats">Phone:</label>
-                    <input type="number" class="form-control" name="phone" value="{{$clients->phone}}">
+                    <input type="number" class="form-control" name="phone" value="{{$client->phone}}">
                 </div>
                 <div class="card-body">
                     <label for="exampleInputEmail1">User:</label>
@@ -47,7 +47,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
-                <a href="{{ route('admin.clients.index') }}" class="btn btn-secondary">Отмена</a>
+                <a href="{{ route('clients.index') }}" class="btn btn-secondary">Отмена</a>
             </form>
         </div>
     </div>

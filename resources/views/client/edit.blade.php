@@ -1,63 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
-    <style>
-        .card-body, .form-group {
-            padding: 0 !important;
-            margin-bottom: 0 !important;
-        }
-    </style>
-</head>
-<body class="hold-transition sidebar-mini">
-@extends('layouts.main')
-@section('content')
-    <form action="{{route('client.update',$client)}}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('put')
-        <div class="card-body">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Name:</label>
-                <input type="text" name="name" value="{{$client->name}}" class="form-control" id="exampleInputEmail1">
-            </div>
-        </div>
-        <div class="card-body">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Surname:</label>
-                <input type="text" name="surname" value="{{$client->surname}}" class="form-control" id="exampleInputEmail1">
-            </div>
-        </div>
-        <div class="card-body">
-            <label for="exampleInputEmail1">Phone:</label>
-            <input class="form-control" value="{{$client->phone}}" type="text" name="phone">
-        </div>
-        <div class="card-body">
-            <label for="exampleInputEmail1">User:</label>
-            <select id="exampleInputEmail1"class="form-control" name="user_id">
-                @foreach($users as $user)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="card-body">
-            <label for="exampleInputEmail1">Restaurant:</label>
-            <select id="exampleInputEmail1"class="form-control" name="restaurant_id">
-                @foreach($restaurants as $restaurant)
-                    <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
-                @endforeach
-            </select>
-        </div>
+<!-- resources/views/client/edit.blade.php -->
 
-        <button type="submit" class="btn btn-info">Изменить</button>
-    </form>
+@extends('layouts.app')
+
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Edit Client
+                    </div>
+                    <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        <form action="{{ route('client.update', $clients->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="form-group">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ $clients->name }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="surname">Surname:</label>
+                                <input type="text" class="form-control" id="surname" name="surname" value="{{ $clients->surname }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone:</label>
+                                <input type="text" class="form-control" id="phone" name="phone" value="{{ $clients->phone }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="user_id">User ID:</label>
+                                <input type="text" class="form-control" id="user_id" name="user_id" value="{{ $clients->user_id }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="restaurant_id">Restaurant ID:</label>
+                                <input type="text" class="form-control" id="restaurant_id" name="restaurant_id" value="{{ $clients->restaurant_id }}">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
-</body>
-</html>

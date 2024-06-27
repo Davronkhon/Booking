@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\Order;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $clients = Order::all();
-        return view('clients.index', compact('clients'));
+        $orders = Order::all();
+        return view('order.index', compact('orders'));
     }
     public function create()
     {

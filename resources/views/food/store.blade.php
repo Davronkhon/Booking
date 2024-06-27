@@ -28,7 +28,7 @@
             <th>Удалить</th>
             <th>Изменить</th>
         </tr>
-        @foreach($all_food as $food)
+        @foreach($foods as $food)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$food->name}}</td>

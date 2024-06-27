@@ -1,43 +1,18 @@
-<!-- resources/views/rest/index.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">List of Items</div>
-
-                    <div class="card-body">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($items as $item)
-                                <tr>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->description }}</td>
-                                    <td>
-                                        <form action="{{ route('rest.destroy', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Удалить бронирование #{{ $rest->id }}</h3>
+        </div>
+        <div class="card-body">
+            <p>Вы уверены, что хотите удалить это бронирование?</p>
+            <form action="{{route('rest.destroy', $rest->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Удалить</button>
+                <a href="{{route('rest.index') }}" class="btn btn-secondary">Отмена</a>
+            </form>
         </div>
     </div>
 @endsection
-
