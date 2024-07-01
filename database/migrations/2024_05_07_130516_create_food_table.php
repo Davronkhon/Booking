@@ -6,28 +6,28 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+/*
+* Run the migrations.
+*/
     public function up(): void
     {
         Schema::create('food', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable(false);
-            $table->foreignId('food_category_id')->constrained();
-            $table->decimal('price')->nullable(false);
+            $table->foreignId('food_category_id')->constrained('food_categories');
+            $table->foreignId('restaurant_id')->constrained('restaurants');
+            $table->string('name');
+            $table->decimal('price', 8, 2);
             $table->string('image');
             $table->text('description');
-            $table->unsignedInteger('time');
-            $table->boolean('is_active');
-            $table->foreignId('restaurant_id')->constrained();
+            $table->dateTime('time');
+            $table->string('is_active');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
+/*
+* Reverse the migrations.
+*/
     public function down(): void
     {
         Schema::dropIfExists('food');

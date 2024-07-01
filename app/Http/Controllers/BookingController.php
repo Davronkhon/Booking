@@ -11,97 +11,71 @@ class BookingController extends Controller
 {
     public function index()
     {
-        $bookings = Booking::all();
+        $bookings = Booking::with('place')->get();
         return view('booking.index', compact('bookings'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
+        $bookings = Booking::all();
         $places = Place::all();
         $clients = Client::all();
-        return view('booking.create', compact('places', 'clients'));
-    }
-
-
-    public function delete(Booking $bookings)
-    {
-        // Удаление бронирования
-        $bookings->delete();
-
-        return response()->json(['message' => 'Бронирование удалено'], 200);
-    }
-
-    private function checkAvailability($date, $time, $seats)
-    {
-        // Проверка наличия свободных мест для указанного времени и даты
-
-        // Пример: Проверяем, что нет пересечений с существующими бронированиями
-        $existingBookings = Booking::where('date', $date)
-            ->where('time', $time)
-            ->sum('seats');
-
-        $availableSeats = 100; // Предположим, что у нас всего 100 мест
-
-        // Проверяем, есть ли достаточно мест для нового бронирования
-        if ($availableSeats - $existingBookings >= $seats) {
-            return true; // Места доступны
-        } else {
-            return false; // Места недоступны
-        }
+        return view('booking.create', compact('places','bookings', 'clients'));
     }
 
     public function store(Request $request)
     {
-        // Валидация данных
+        //dd($request);
         $validated = $request->validate([
             'start_time' => 'required|date',
             'end_time' => 'required|date|after_or_equal:start_time',
-            'guests_count' => 'required|integer|min:1',
+            'guests' => 'required',
             'status' => 'required|string',
             'place_id' => 'required|exists:places,id',
             'client_id' => 'required|exists:clients,id',
         ]);
+        dd($request->all());
 
-        // Сохранение данных
-        Booking::create($validated);
-
-        return redirect()->route('booking.create')->with('message', 'Booking created successfully!');
+        //Booking::create($validated);
+        //return redirect()->route('booking.index')->with('message', 'Booking created successfully!');
     }
 
     public function show($id)
     {
-        $bookings =Booking::findOrFail($id);
-        return view('booking.edit', compact('bookings'));
+        $bookings = Booking::findOrFail($id);
+        $places = Place::findOrFail($id);
+        $clients = Client::findOrFail($id);
+        return view('booking.show', compact('bookings', 'places', 'clients'));
+    }
+
+    public function edit($id)
+    {
+        $bookings = Booking::findOrFail($id);
+        $places = Place::all();
+        $clients = Client::all();
+        return view('booking.edit', compact('bookings', 'places', 'clients'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $vali = $request->validate([
             'start_time' => 'required',
             'end_time' => 'required',
-            'guests_count' => 'required',
+            'guests' => 'required',
             'status' => 'required',
             'client_id' => 'required|exists:clients,id',
             'place_id' => 'required|exists:places,id',
         ]);
 
         $bookings = Booking::findOrFail($id);
-
-        $bookings->client_id = $request->client_id;
-        $bookings->place_id = $request->place_id;
-        $bookings->start_time = $request->start_time;
-        $bookings->end_time = $request->end_time;
-        $bookings->guests_count = $request->guests_count;
-        $bookings->status = $request->status;
-        $bookings->save();
-
-        return redirect()->route('booking.index')->with('success', 'bookings updated successfully.');
+        $bookings->update($vali);
+        return redirect('/booking')->with('success', 'bookings updated successfully.');
     }
 
     public function destroy($id)
     {
         $bookings = Booking::findOrFail($id);
         $bookings->delete();
-        return redirect()->route('booking.index')->with('success', 'bookings deleted successfully.');
+        return redirect('/booking')->with('success', 'bookings deleted successfully.');
     }
 }

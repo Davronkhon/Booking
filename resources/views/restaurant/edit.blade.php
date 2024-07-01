@@ -11,7 +11,7 @@
                 {{session('message')}}
             </div>
         @endif
-        <form action="{{route('restaurant.store', $restaurant->id)}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('restaurant.update', $restaurant->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="">name : </label>
             <input type="text" name="name" class="form-control" value="{{$restaurant->name}}">

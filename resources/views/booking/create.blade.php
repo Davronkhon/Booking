@@ -13,29 +13,21 @@
         @endif
         <form action="{{route('booking.store')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <label for="">Начало времени: </label><br>
-            <label>
-                <input type="date" name="title" class="form-control">
-            </label><br>
-            <label for="">Конец времени: </label><br>
-            <label>
-                <input type="date" name="text" class="form-control">
-            </label><br>
-            <label for="">Гости: </label><br>
-            <label>
-                <input type="text" name="guests_count" class="form-control">
-            </label><br>
-            <label for="">Статус: </label><br>
-            <label>
-                <input type="text" name="status" class="form-control">
-            </label><br>
-            <label for="">Место: </label><br>
+            <label for="">start_time : </label>
+            <input type="date" name="date" class="form-control">
+            <label for="">end_time : </label>
+            <input type="date" name="time" class="form-control">
+            <label for="">guests_count : </label>
+            <input type="text" name="guests" class="form-control">
+            <label for="">status : </label>
+            <input type="text" name="status" class="form-control">
+            <label for="">Place_id: </label>
             <select name="place_id" id="" class="form-control">
                 @foreach($places as $place)
                     <option value="{{$place->id}}">{{$place->name}}</option>
                 @endforeach
-            </select><br>
-            <label for="">Клиент: </label><br>
+            </select>
+            <label for="">Client_id: </label>
             <select name="client_id" id="" class="form-control">
                 @foreach($clients as $client)
                     <option value="{{$client->id}}">{{$client->name}}</option>

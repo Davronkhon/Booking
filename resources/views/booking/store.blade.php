@@ -26,10 +26,10 @@
             <th>Удалить</th>
             <th>Изменить</th>
         </tr>
-        @foreach($all_booking as $booking)
+        @foreach($bookings as $booking)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{$booking->start}}</td>
+                <td>{{$booking->date}}</td>
                 <td>{{$booking->end}}</td>
                 <td>{{$booking->guests}}</td>
                 <td>{{$booking->status}}</td>

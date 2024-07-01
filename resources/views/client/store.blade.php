@@ -13,7 +13,7 @@
             {{session('message2')}}
         </div>
     @endif
-    <a href="{{route('client.create')}}" class="btn btn-primary">Добавить</a>
+    <a href="{{route('clients.create')}}" class="btn btn-primary">Добавить</a>
     <table class="table">
         <tr>
             <th>#</th>
@@ -25,15 +25,15 @@
             <th>Удалить</th>
             <th>Изменить</th>
         </tr>
-        @foreach($clients as $client)
+        @foreach($all_client as $client)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$client->name}}</td>
                 <td>{{$client->surname}}</td>
                 <td>{{$client->phone}}</td>
                 <td>{{$client->user->name}}</td>
-                <td>{{$client->restaurant->name}}</td>
-                <td>{{$client->update_at}}</td>
+                <td>{{$booking->restaurant->name}}</td>
+                <td>{{$booking->update_at}}</td>
                 <td>
                     <form action="{{route('clients.destroy', $client->id)}}" method="post">
                         @csrf

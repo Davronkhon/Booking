@@ -1,44 +1,47 @@
 @extends('layouts.app')
+@section('title')
+    <h3>Таблица clients</h3>
+@endsection
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Clients</h1>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Surname</th>
-                        <th>Phone</th>
-                        <th>User ID</th>
-                        <th>Restaurant ID</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($clients as $client)
-                        <tr>
-                            <td>{{ $client->name }}</td>
-                            <td>{{ $client->surname }}</td>
-                            <td>{{ $client->phone }}</td>
-                            <td>{{ $client->user_id }}</td>
-                            <td>{{ $client->restaurant_id }}</td>
-                            <td>
-                                <a href="{{ route('client.show', $client->id) }}" class="btn btn-primary btn-sm">Show</a>
-                                <a href="{{ route('client.edit', $client->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="{{ route('client.destroy', $client->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this client?')">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                <a href="{{ route('client.create') }}" class="btn btn-success">Create Client</a>
-            </div>
-        </div>
-    </div>
+    <a href="{{route('client.create')}}" class="btn btn-info">Добавить</a>
+    <br><br>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>name</th>
+            <th>surname</th>
+            <th>phone</th>
+            <th>restaurant_id</th>
+            <th>user_id</th>
+            <th>delete</th>
+            <th>update</th>
+        </tr>
+        @foreach($clients as $client)
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$client->name}}</td>
+                <td>{{$client->surname}}</td>
+                <td>{{$client->phone}}</td>
+                <td>{{$client->restaurants->name}}</td>
+                <td>{{$client->user->username}}</td>
+                <td>
+                    <form action="{{route('client.destroy', $client->id)}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <input type="submit" value="delete" class="btn btn-danger">
+                    </form>
+                </td>
+                <td>
+                    <form action="{{route('client.edit', $client->id)}}" method="get">
+                        @csrf
+                        <input type="submit" value="update" class="btn btn-info">
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </table>
+@endsection
+
+@section('footer')
 @endsection

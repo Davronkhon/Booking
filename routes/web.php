@@ -37,7 +37,9 @@ Route::resource('foodcat', FoodCategoryController::class);
 Route::resource('user', UserController::class);
 Route::resource('rest', RestCategoryController::class);
 Route::resource('restaurant', RestaurantController::class);
-Route::resource('booking', BookingController::class);
 Route::resource('place', PlaceController::class);
 Route::resource('client', ClientController::class);
+Route::resource('booking', BookingController::class);
+Route::resource('food', FoodController::class);
 Route::resource('order', OrderController::class);
+

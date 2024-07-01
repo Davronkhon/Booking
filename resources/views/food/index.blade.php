@@ -4,6 +4,9 @@
 @endsection
 
 @section('content')
+    <br>
+    <a href="{{route('food.create')}}" class="btn btn-primary">Добавить</a>
+    <br>
     <table class="table">
         <tr>
             <th>#</th>
@@ -17,7 +20,6 @@
             <th>food_category_id</th>
             <th>delete</th>
             <th>update</th>
-            <th>Additionally</th>
         </tr>
         @foreach($foods as $food)
             <tr>
@@ -28,8 +30,8 @@
                 <td>{{$food->description}}</td>
                 <td>{{$food->time}}</td>
                 <td>{{$food->is_active}}</td>
-                <td>{{$food->restaurant->name}}</td>
-                <td>{{$food->food_category->name}}</td>
+                <td>{{ optional($food->restaurant)->name }}</td>
+                <td>{{ optional($food->foodcategory)->name }}</td>
                 <td>
                     <form action="{{route('food.destroy', $food->id)}}" method="post">
                         @csrf

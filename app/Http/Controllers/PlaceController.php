@@ -2,8 +2,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\place;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
-use Psr\Log\AbstractLogger;
 
 class PlaceController extends Controller
 {
@@ -15,22 +15,22 @@ class PlaceController extends Controller
 
     public function create()
     {
-        return view('place.create');
+        $restourants =  Restaurant::all();
+        return view('place.create', compact('restourants'));
     }
 
     public function store(Request $request)
     {
-        $plac = $request->validate([
+        $request->validate([
             'name' => 'required|string',
             'number' => 'required|string',
             'description' => 'nullable|string',
             'capacity' => 'required|integer',
             'restaurant_id' => 'required|exists:restaurants,id'
         ]);
+        Place::create($request->all());
 
-        Place::create($plac);
-
-        return redirect('/places')->with('success', 'places created successfully');
+        return redirect('/place')->with('success', 'Place created successfully');
     }
 
     public function show($id)
@@ -41,24 +41,25 @@ class PlaceController extends Controller
 
     public function edit($id)
     {
+        $restourants = Restaurant::all();
         $places = Place::findOrFail($id);
-        return view('place.edit', compact('places'));
+        return view('place.edit', compact('places', 'restourants'));
     }
 
     public function update(Request $request, $id)
     {
-        $plac = $request->validate([
+        $request->validate([
             'name' => 'required|string',
-            'surname' => 'required|string',
-            'phone' => 'required|string',
-            'user_id' => 'required|exists:users,id',
+            'number' => 'required|string',
+            'description' => 'nullable|string',
+            'capacity' => 'required|integer',
             'restaurant_id' => 'required|exists:restaurants,id'
         ]);
 
-        $places = Place::findOrFail($id);
-        $places->update($plac);
+        $places= Place::findOrFail($id);
+        $places->update($request->all());
 
-        return redirect('/places')->with('success', 'places updated successfully');
+        return redirect('/place')->with('success', 'Place updated successfully');
     }
 
     public function destroy($id)
@@ -66,7 +67,7 @@ class PlaceController extends Controller
         $places = Place::findOrFail($id);
         $places->delete();
 
-        return redirect('/places')->with('success', 'places deleted successfully');
+        return redirect('/place')->with('success', 'Place deleted successfully');
     }
 }
 

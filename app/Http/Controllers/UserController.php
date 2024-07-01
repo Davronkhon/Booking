@@ -35,14 +35,14 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $userss = $request->validate([
+        $users = $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
             'role' => 'required|string',
             'email' => 'required|string',
         ]);
 
-        User::create($userss);
+        User::create($users);
         return redirect()->route('user.index')->with('success', 'User успешно добавлена');
     }
     public function update(Request $request, $id)

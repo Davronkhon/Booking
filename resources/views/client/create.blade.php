@@ -1,52 +1,26 @@
-<!-- resources/views/client/create.blade.php -->
-
 @extends('layouts.app')
-
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        Create New Client
-                    </div>
-                    <div class="card-body">
-                        @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-                        <form action="{{ route('client.store') }}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label for="name">Name:</label>
-                                <input type="text" class="form-control" id="name" name="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="surname">Surname:</label>
-                                <input type="text" class="form-control" id="surname" name="surname">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone:</label>
-                                <input type="text" class="form-control" id="phone" name="phone">
-                            </div>
-                            <div class="form-group">
-                                <label for="user_id">User ID:</label>
-                                <input type="text" class="form-control" id="user_id" name="user_id">
-                            </div>
-                            <div class="form-group">
-                                <label for="restaurant_id">Restaurant ID:</label>
-                                <input type="text" class="form-control" id="restaurant_id" name="restaurant_id">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    <form action="{{route('client.store')}}" method="POST" enctype="multipart/form-data">
+        @csrf
+        <label for="exampleInputEmail1">Name:</label>
+        <input type="text" name="name" class="form-control" id="exampleInputEmail1">
+        <label for="exampleInputEmail1">Surname:</label>
+        <input type="text" name="surname" class="form-control" id="exampleInputEmail1">
+        <label for="exampleInputEmail1">Phone:</label>
+        <input class="form-control" type="text" name="phone">
+        <label for="">User:</label>
+        <select name="user_id" class="form-control">
+            @foreach($users as $user)
+                <option value="{{$user->id}}">{{$user->name}}</option>
+            @endforeach
+        </select>
+        <label for="">Restaurant:</label>
+        <select name="restaurant_id" class="form-control">
+            @foreach($restaurants as $restaurant)
+                <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
+            @endforeach
+        </select><br>
+        <input type="submit" value="Добавить" class="btn btn-primary form-control">
+    </form>
 @endsection

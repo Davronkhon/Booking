@@ -2,24 +2,29 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Restaurant;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
     public function index()
     {
-        $clients = Client::all();
-        return view('client.index', compact('clients'));
+        $clients = Client::with('user')->get();
+        return view('client.index', compact('clients' ));
     }
 
     public function create()
     {
-        return view('client.create');
+        $users = User::all();
+        $restaurants = Restaurant::all();
+        return view('client.create', compact( 'restaurants', 'users'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        //dd($request);
+        $clin = $request->validate([
             'name' => 'required|string',
             'surname' => 'required|string',
             'phone' => 'required|string',
@@ -27,9 +32,8 @@ class ClientController extends Controller
             'restaurant_id' => 'required|exists:restaurants,id'
         ]);
 
-        Client::create($request->all());
-
-        return redirect('/client')->with('success', 'Client created successfully');
+        Client::create($clin);
+        return redirect()->route('client.index')->with('success', 'Client created successfully');
     }
 
     public function show($id)
@@ -40,13 +44,15 @@ class ClientController extends Controller
 
     public function edit($id)
     {
+        $restaurants = Restaurant::all();
+        $users = User::all();
         $clients = Client::findOrFail($id);
-        return view('client.edit', compact('clients'));
+        return view('client.edit', compact('clients', 'users', 'restaurants'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $clin = $request->validate([
             'name' => 'required|string',
             'surname' => 'required|string',
             'phone' => 'required|string',
@@ -55,8 +61,7 @@ class ClientController extends Controller
         ]);
 
         $clients = Client::findOrFail($id);
-        $clients->update($request->all());
-
+        $clients->update($clin);
         return redirect('/client')->with('success', 'Client updated successfully');
     }
 
@@ -64,7 +69,6 @@ class ClientController extends Controller
     {
         $clients = Client::findOrFail($id);
         $clients->delete();
-
         return redirect('/client')->with('success', 'Client deleted successfully');
     }
 }
