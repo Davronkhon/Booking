@@ -113,11 +113,18 @@ class BookingController extends Controller
             'status' => 'required|string',
             'place_id' => 'required|exists:places,id',
             'client_id' => 'required|exists:clients,id',
-        ]);
+        ]); crudSaid
 
         DB::transaction(function () use ($validated) {
             Booking::create($validated);
         });
+
+      Booking::create($validated);
+
+        //DB::transaction(function () use ($validated) {
+            //Booking::create($validated);
+        //});
+ main
 
         return redirect()->route('booking.index')->with('message', 'Бронирование успешно создано!');
     }
