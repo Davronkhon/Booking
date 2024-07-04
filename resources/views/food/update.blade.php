@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <div class="card">
@@ -51,8 +51,8 @@
                 <div class="card-body">
                     <label for="exampleInputEmail1">Food_category:</label>
                     <select id="exampleInputEmail1" name="food_category_id">
-                        @foreach($food_categories as $food_category)
-                            <option value="{{$food_category->id}}">{{$food_category->name}}</option>
+                        @foreach($foodcats as $foodcat)
+                            <option value="{{$foodcat->id}}">{{$foodcat->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -65,7 +65,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
-                <a href="{{ route('admin.food.index') }}" class="btn btn-secondary">Отмена</a>
+                <a href="{{ route('food.index') }}" class="btn btn-secondary">Отмена</a>
             </form>
         </div>
     </div>

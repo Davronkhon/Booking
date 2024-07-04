@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('client_id')->constrained();
             $table->foreignId('place_id')->constrained();
             $table->timestamp('start_time');
             $table->dateTime('end_time');
-            $table->foreignId('client_id')->constrained();
             $table->unsignedInteger('guests_count')->nullable(false);
             $table->string('status')->nullable(false);
             $table->timestamps();

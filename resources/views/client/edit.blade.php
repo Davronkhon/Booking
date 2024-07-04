@@ -1,43 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
-    <style>
-        .card-body, .form-group {
-            padding: 0 !important;
-            margin-bottom: 0 !important;
-        }
-    </style>
-</head>
-<body class="hold-transition sidebar-mini">
-@extends('layouts.main')
+@extends('layouts.app')
 @section('content')
-    <form action="{{route('client.update',$client)}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('client.update',$clients)}}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('put')
         <div class="card-body">
             <div class="form-group">
                 <label for="exampleInputEmail1">Name:</label>
-                <input type="text" name="name" value="{{$client->name}}" class="form-control" id="exampleInputEmail1">
+                <input type="text" name="name" value="{{$clients->name}}" class="form-control" id="exampleInputEmail1">
             </div>
         </div>
         <div class="card-body">
             <div class="form-group">
                 <label for="exampleInputEmail1">Surname:</label>
-                <input type="text" name="surname" value="{{$client->surname}}" class="form-control" id="exampleInputEmail1">
+                <input type="text" name="surname" value="{{$clients->surname}}" class="form-control" id="exampleInputEmail1">
             </div>
         </div>
         <div class="card-body">
             <label for="exampleInputEmail1">Phone:</label>
-            <input class="form-control" value="{{$client->phone}}" type="text" name="phone">
+            <input class="form-control" value="{{$clients->phone}}" type="text" name="phone">
         </div>
         <div class="card-body">
             <label for="exampleInputEmail1">User:</label>
@@ -59,5 +39,6 @@
         <button type="submit" class="btn btn-info">Изменить</button>
     </form>
 @endsection
-</body>
-</html>
+
+@section('footer')
+@endsection

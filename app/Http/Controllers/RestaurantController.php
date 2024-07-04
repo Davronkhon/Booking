@@ -2,84 +2,73 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RestCategory;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
-use App\Models\RestCategory;
 
 class RestaurantController extends Controller
 {
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::with('restCategory')->get();
         return view('restaurant.index', compact('restaurants'));
     }
 
     public function create()
     {
-        return view('restaurant.create');
+        $restaurants = Restaurant::all();
+        $categories  = RestCategory::all();
+        return view('restaurant.create', compact('restaurants','categories'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'rest_category_id' => 'required|exists:rest_categories,id',
+        //dd($request);
+        $restaurant = $request->validate([
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'required|string',
+            'rest_category_id' => 'required|string',
         ]);
 
-        Restaurant::create([
-            'name' => $request->name,
-            'address' => $request->address,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'rest_category_id' => $request->rest_category_id,
-        ]);
-
-        return redirect()->route('restaurant.index')->with('success', 'Restaurants created successfully.');
+        Restaurant::create($restaurant);
+        return redirect()->route('restaurant.index')->with('success', 'Rest успешно добавлена');
     }
 
     public function show($id)
     {
         $restaurants = Restaurant::findOrFail($id);
-        return view('restaurant.show', compact('restaurants'));
+        $categories  = RestCategory::findOrFail($id);
+        return view('restaurant.show', compact('restaurants', 'categories'));
     }
 
     public function edit($id)
     {
         $restaurants = Restaurant::findOrFail($id);
-        return view('restaurant.edit', compact('restaurants'));
+        $categories  = RestCategory::findOrFail($id);
+        return view('restaurant.edit', compact('restaurants', 'categories'));
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'rest_category_id' => 'required|exists:rest_categories,id',
+        $restauran = $request->validate([
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'required|string',
+            'rest_category_id' => 'required|string',
         ]);
 
-        $restaurants = Restaurant::findOrFail($id);
-
-
-        $restaurants->name = $request->name;
-        $restaurants->address = $request->address;
-        $restaurants->phone = $request->phone;
-        $restaurants->email = $request->email;
-        $restaurants->rest_category_id = $request->rest_category_id;
-        $restaurants->save();
-
-        return redirect()->route('restaurant.index')->with('success', 'restaurants updated successfully.');
+        $restaurants = RestCategory::findOrFail($id);
+        $restaurants->update($restauran);
+        return redirect('/restaurant')->with('success', 'Rest updated successfulle');
     }
 
     public function destroy($id)
     {
         $restaurants = Restaurant::findOrFail($id);
         $restaurants->delete();
-
-        return redirect()->route('restaurant.index')->with('success', 'restaurants deleted successfully.');
+        return redirect('/restaurant')->with('success', 'restaurants deleted successfully.');
     }
 }

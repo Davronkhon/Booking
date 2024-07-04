@@ -4,70 +4,61 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RestCategory;
-use App\Models\Restaurant;
 
 class RestCategoryController extends Controller
 {
     public function index()
     {
-        $rest_category = RestCategory::all();
-        return view('admin.rest_category.index', compact('rest_category'));
+        $rests = RestCategory::all();
+        return view('rest.index', compact('rests'));
     }
 
 
     public function create()
     {
-        return view('rest_category.create');
+        $rests = RestCategory::all();
+        return view('rest.create', compact('rests'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
+        $restss = $request->validate([
+            'name' => 'required|string',
+            'description' => 'required|string',
         ]);
 
-        RestCategory::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            ]);
-
-        return redirect()->route('rest_category.index')->with('success', 'rest_category created successfully.');
+        RestCategory::create($restss);
+        return redirect()->route('rest.index')->with('success', 'Rest успешно добавлена');
     }
 
     public function show($id)
     {
-        $rest_category = RestCategory::findOrFail($id);
-        return view('rest_category.show', compact('rest_category'));
+        $rests = RestCategory::findOrFail($id);
+        return view('rest.show', compact('rests'));
     }
 
     public function edit($id)
     {
-        $rest_category = RestCategory::findOrFail($id);
-        return view('rest_category.edit', compact('rest_category'));
+        $rest = RestCategory::findOrFail($id);
+        return view('rest.edit', compact('rest'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'description' => 'required',
+            'name' => 'required|string',
+            'description' => 'required|string',
         ]);
 
-        $rest_category = RestCategory::findOrFail($id);
-
-        $rest_category->name = $request->name;
-        $rest_category->description = $request->description;
-        $rest_category->save();
-
-        return redirect()->route('rest_category.index')->with('success', 'rest_category updated successfully.');
+        $rest = RestCategory::findOrFail($id);
+        $rest->update($request->all());
+        return redirect('/rest')->with('success', 'Rest updated successfulle');
     }
 
     public function destroy($id)
     {
-        $rest_category = RestCategory::findOrFail($id);
-        $rest_category->delete();
-
-        return redirect()->route('rest_category.index')->with('success', 'rest_category deleted successfully.');
+        $rests = RestCategory::findOrFail($id);
+        $rests->delete();
+        return redirect('/rest')->with('success', 'Rest deleted successfully');
     }
 }

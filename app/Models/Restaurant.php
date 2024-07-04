@@ -12,6 +12,6 @@ class Restaurant extends Model
 
     public function restCategory()
     {
-        return $this->belongsTo(RestCategory::class, 'rest_category_id');
+        return $this->belongsTo(RestCategory::class);
     }
 }

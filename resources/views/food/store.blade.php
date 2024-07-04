@@ -28,7 +28,7 @@
             <th>Удалить</th>
             <th>Изменить</th>
         </tr>
-        @foreach($all_food as $food)
+        @foreach($foods as $food)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$food->name}}</td>
@@ -37,7 +37,7 @@
                 <td>{{$food->description}}</td>
                 <td>{{$food->time}}</td>
                 <td>{{$food->is_active}}</td>
-                <td>{{$food->food_category->name}}</td>
+                <td>{{$food->foodcategory->name}}</td>
                 <td>{{$food->restaurant->name}}</td>
                 <td>{{$food->update_at}}</td>
                 <td>

@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('title')
-    Добавление
 @endsection
 <!-- create -->
 @section('content')
@@ -11,24 +10,19 @@
                 {{session('message')}}
             </div>
         @endif
-        <form action="{{route('user.story')}}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
             @csrf
-            <label for="">Заголовок : </label>
-            <input type="text" name="title" class="form-control">
-            <label for="">Текст : </label>
-            <input type="text" name="text" class="form-control">
-            <label for="">Категория : </label>
-            <select name="category_id" id="" class="form-control">
-                @foreach($users as $user)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
-                @endforeach
-            </select>
-            <label for="">Рисунок : </label>
-            <input type="file" name="image" class="form-control">
+            <label for="">UserName : </label>
+            <input type="text" name="username" class="form-control">
+            <label for="">Password : </label>
+            <input type="password" name="password" class="form-control">
+            <label for="">Role : </label>
+            <input type="text" name="role" class="form-control">
+            <label for="">Email : </label>
+            <input type="email" name="email" class="form-control"><br>
             <input type="submit" value="Добавить" class="btn btn-primary form-control">
         </form>
     </div>
 @endsection
-
 @section('footer')
 @endsection

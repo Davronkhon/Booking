@@ -1,7 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Place;
+use App\Models\place;
+use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
 class PlaceController extends Controller
@@ -9,12 +10,13 @@ class PlaceController extends Controller
     public function index()
     {
         $places = Place::all();
-        return view('places.index', compact('places'));
+        return view('place.index', compact('places'));
     }
 
     public function create()
     {
-        return view('places.create');
+        $restourants =  Restaurant::all();
+        return view('place.create', compact('restourants'));
     }
 
     public function store(Request $request)
@@ -26,22 +28,22 @@ class PlaceController extends Controller
             'capacity' => 'required|integer',
             'restaurant_id' => 'required|exists:restaurants,id'
         ]);
-
         Place::create($request->all());
 
-        return redirect('/places')->with('success', 'Place created successfully');
+        return redirect('/place')->with('success', 'Place created successfully');
     }
 
     public function show($id)
     {
-        $place = Place::findOrFail($id);
-        return view('places.show', compact('place'));
+        $places = Place::findOrFail($id);
+        return view('place.show', compact('places'));
     }
 
     public function edit($id)
     {
-        $place = Place::findOrFail($id);
-        return view('places.edit', compact('place'));
+        $restourants = Restaurant::all();
+        $places = Place::findOrFail($id);
+        return view('place.edit', compact('places', 'restourants'));
     }
 
     public function update(Request $request, $id)
@@ -54,17 +56,18 @@ class PlaceController extends Controller
             'restaurant_id' => 'required|exists:restaurants,id'
         ]);
 
-        $place = Place::findOrFail($id);
-        $place->update($request->all());
+        $places= Place::findOrFail($id);
+        $places->update($request->all());
 
-        return redirect('/places')->with('success', 'Place updated successfully');
+        return redirect('/place')->with('success', 'Place updated successfully');
     }
 
     public function destroy($id)
     {
-        $place = Place::findOrFail($id);
-        $place->delete();
+        $places = Place::findOrFail($id);
+        $places->delete();
 
-        return redirect('/places')->with('success', 'Place deleted successfully');
+        return redirect('/place')->with('success', 'Place deleted successfully');
     }
 }
+

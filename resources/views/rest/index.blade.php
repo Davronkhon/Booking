@@ -1,48 +1,49 @@
-<!-- resources/views/rest/index.blade.php -->
-
 @extends('layouts.app')
 
-@section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">List of Items</div>
-
-                    <div class="card-body">
-                        @if (session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                        @endif
-
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($items as $item)
-                                <tr>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->description }}</td>
-                                    <td>
-                                        <a href="{{ route('rest.edit', $item->id) }}" class="btn btn-primary">Edit</a>
-                                        <form action="{{ route('rest.destroy', $item->id) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+@section('title')
 @endsection
 
+@section('content')
+    @if(session('message'))
+        <div class="alert alert-danger">
+            {{session('message')}}
+        </div>
+    @elseif(session('message2'))
+        <div class="alert alert-info">
+            {{session('message2')}}
+        </div>
+    @endif
+    <a href="{{route('rest.create')}}" class="btn btn-primary">Добавить</a>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Удалить</th>
+            <th>Изменить</th>
+        </tr>
+        @foreach($rests as $rest)
+            <tr>
+                <td>{{$loop->iteration}}</td>
+                <td>{{$rest->name}}</td>
+                <td>{{$rest->description}}</td>
+                <td>
+                    <form action="{{route('rest.destroy', $rest->id)}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <input type="submit" value="Удалить" class="btn btn-danger">
+                    </form>
+                </td>
+                <td>
+                    <form action="{{route('rest.edit', $rest->id)}}" method="get">
+                        @csrf
+                        <input type="submit" value="Изменить" class="btn btn-info">
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </table>
+@endsection
+
+@section('footer')
+@endsection

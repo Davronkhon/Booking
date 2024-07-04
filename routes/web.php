@@ -21,17 +21,25 @@ use App\Http\Controllers\RestCategoryController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+/*
+Route::get('/booking', [BookingController::class, 'create'])->name('booking.create');
+Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+Route::get('/food', [FoodController::class, 'index'])->name('food.index');
+Route::get('/foodcater', [FoodCategoryController::class, 'index'])->name('foodcat.index');
+Route::get('order', [OrderController::class, 'index'])->name('order.index');
+Route::get('place', [PlaceController::class, 'index'])->name('place.index');
+Route::get('/restaurant', [RestaurantController::class, 'index'])->name('restaurant.index');
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::get('/rest', [RestCategoryController::class, 'index'])->name('rest.index');*/
 
-/*Route::get('/', function (){
-    return view('welcome');
-});*/
 
-Route::post('/booking', [BookingController::class, 'index'])->name('booking.index');
-Route::post('/client', [ClientController::class, 'index'])->name('client.index');
-Route::post('/food', [FoodController::class, 'index'])->name('food.index');
-Route::post('/foodcater', [FoodCategoryController::class, 'index'])->name('foodcat.index');
-Route::post('order', [OrderController::class, 'index'])->name('order.index');
-Route::post('place', [PlaceController::class, 'index'])->name('place.index');
-Route::post('/restaurant', [RestaurantController::class, 'index'])->name('restaurant.index');
-Route::post('/user', [UserController::class, 'index'])->name('user.index');
-Route::post('/rest', [RestCategoryController::class, 'index'])->name('rest.index');
+Route::resource('foodcat', FoodCategoryController::class);
+Route::resource('user', UserController::class);
+Route::resource('rest', RestCategoryController::class);
+Route::resource('restaurant', RestaurantController::class);
+Route::resource('place', PlaceController::class);
+Route::resource('client', ClientController::class);
+Route::resource('booking', BookingController::class);
+Route::resource('food', FoodController::class);
+Route::resource('order', OrderController::class);
+

@@ -3,44 +3,47 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\User;
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $user = User::all();
-        return view('user.index', compact('user'));
+        $users = User::all();
+        return view('user.index', compact('users'));
     }
     public function create()
     {
-        return view('user.create');
+        $users = User::all();
+        return view('user.create', compact('users'));
     }
-    public function destroy(User $user, $id)
+    public function destroy($id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        $users = User::findOrFail($id);
+        $users->delete();
+        return redirect('/user')->with('success', 'User deleted successfully');
     }
-    public function edit(User $user, $id)
+    public function edit($id)
     {
         $user = User::findOrFail($id);
         return view('user.edit', compact('user'));
     }
     public function show(User $user, $id)
     {
-        $user = User::findOrFail($id);
-        return view('user.show', compact('user'));
+        $users = User::findOrFail($id);
+        return view('user.show', compact('users'));
     }
     public function store(Request $request)
     {
-        $request->validate([
+        $users = $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
             'role' => 'required|string',
             'email' => 'required|string',
         ]);
 
-        User::create($request->all());
+        User::create($users);
+        return redirect()->route('user.index')->with('success', 'User успешно добавлена');
     }
     public function update(Request $request, $id)
     {
@@ -51,7 +54,8 @@ class UserController extends Controller
             'email' => 'required|string',
         ]);
 
-        $user = User::findOrFail($id);
-        $user->update($request->all());
+        $users = User::findOrFail($id);
+        $users->update($request->all());
+        return redirect('/user')->with('success', 'User updated successfulle');
     }
 }
