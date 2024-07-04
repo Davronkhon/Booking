@@ -10,7 +10,7 @@
                     <div class="card-header">Edit</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('rest.update', $item->id) }}">
+                        <form method="POST" action="{{ route('rest.update', $rest->id) }}">
                             @csrf
                             @method('PUT')
 
@@ -18,7 +18,7 @@
                                 <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $item->name) }}" required autocomplete="name" autofocus>
+                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name', $rest->name) }}" required autocomplete="name" autofocus>
 
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -32,7 +32,7 @@
                                 <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Description') }}</label>
 
                                 <div class="col-md-6">
-                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description">{{ old('description', $item->description) }}</textarea>
+                                    <textarea id="description" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description">{{ old('description', $rest->description) }}</textarea>
 
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">

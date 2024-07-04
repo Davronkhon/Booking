@@ -1,55 +1,37 @@
 @extends('layouts.app')
 
-@section('title')
-@endsection
-
 @section('content')
-    @if(session('message'))
-        <div class="alert alert-danger">
-            {{session('message')}}
-        </div>
-    @elseif(session('message2'))
-        <div class="alert alert-info">
-            {{session('message2')}}
-        </div>
-    @endif
-    <a href="{{route('user.create')}}" class="btn btn-primary">Добавить</a>
+    <h1>Users</h1>
+
+    <a href="{{ route('user.create') }}" class="btn btn-primary">Create User</a>
+
     <table class="table">
+        <thead>
         <tr>
             <th>#</th>
-            <th>Заголовок</th>
-            <th>Рисунок</th>
-            <th>Категория</th>
-            <th>Дата создания</th>
-            <th>Дата изменения</th>
-            <th>Удалить</th>
-            <th>Изменить</th>
+            <th>username</th>
+            <th>role</th>
+            <th>Email</th>
         </tr>
-        @foreach($all_user as $user)
+        </thead>
+        <tbody>
+        @foreach($users as $user)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{$user->title}}</td>
-                <td>{{$user->image}}</td>
-                <td>{{$user->category->name}}</td>
-                <td>{{$user->category_id}}</td>
-                <td>{{$user->update_at}}</td>
+                <td>{{ $user->username }}</td>
+                <td>{{ $user->role }}</td>
+                <td>{{ $user->email }}</td>
                 <td>
-                    <form action="{{route('user.destroy', $user->id)}}" method="post">
+                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Edit</a>
+
+                    <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display: inline-block;">
                         @csrf
                         @method('delete')
-                        <input type="submit" value="Удалить" class="btn btn-danger">
-                    </form>
-                </td>
-                <td>
-                    <form action="{{route('user.edit', $user->id)}}" method="get">
-                        @csrf
-                        <input type="submit" value="Изменить" class="btn btn-info">
+                        <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
             </tr>
         @endforeach
+        </tbody>
     </table>
-@endsection
-
-@section('footer')
 @endsection

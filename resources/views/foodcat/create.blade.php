@@ -11,7 +11,7 @@
                 {{session('message')}}
             </div>
         @endif
-        <form action="{{route('foodcat.story')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('foodcat.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="">Name : </label>
             <input type="text" name="name" class="form-control">

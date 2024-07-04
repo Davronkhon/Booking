@@ -26,7 +26,7 @@
             <th>Удалить</th>
             <th>Изменить</th>
         </tr>
-        @foreach($all_order as $order)
+        @foreach($orders as $order)
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$order->quantity}}</td>

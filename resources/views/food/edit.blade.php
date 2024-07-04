@@ -18,7 +18,7 @@
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
-@extends('layouts.main')
+@extends('layouts.app')
 @section('content')
     <form action="{{route('food.update',$food)}}" method="POST" enctype="multipart/form-data">
         @csrf

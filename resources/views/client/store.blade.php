@@ -13,7 +13,7 @@
             {{session('message2')}}
         </div>
     @endif
-    <a href="{{route('client.create')}}" class="btn btn-primary">Добавить</a>
+    <a href="{{route('clients.create')}}" class="btn btn-primary">Добавить</a>
     <table class="table">
         <tr>
             <th>#</th>

@@ -3,55 +3,60 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Models\User;
+use App\Models\User;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $user = User::all();
-        return view('user.index', compact('user'));
+        $users = User::all();
+        return view('user.index', compact('users'));
     }
     public function create()
     {
-        return view('user.create');
+        $users = User::all();
+        return view('user.create', compact('users'));
     }
-    public function destroy(User $user, $id)
+    public function destroy(User $users, $id)
     {
-        $user = User::findOrFail($id);
-        $user->delete();
+        $users = User::findOrFail($id);
+        $users->delete();
+        return redirect('/user')->with('success', 'Users updated succesfully');
     }
-    public function edit(User $user, $id)
+    public function edit(User $users, $id)
     {
-        $user = User::findOrFail($id);
-        return view('user.edit', compact('user'));
+        $users = User::findOrFail($id);
+        return view('user.edit', compact('users'));
     }
-    public function show(User $user, $id)
+    public function show(User $users, $id)
     {
-        $user = User::findOrFail($id);
-        return view('user.show', compact('user'));
+        $users = User::findOrFail($id);
+        return view('user.index', compact('users'));
     }
     public function store(Request $request)
     {
-        $request->validate([
+        $validated=$request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
             'role' => 'required|string',
             'email' => 'required|string',
         ]);
-
-        User::create($request->all());
+        // Сохранение данных
+        User::create($validated);
+       return redirect()->route('user.index')->with('message', 'Booking created successfully!');
     }
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
-            'role' => 'required|string',
-            'email' => 'required|string',
-        ]);
+//            dd($request);
+//        $request->validate([
+//            'username' => 'required|string',
+//            'password' => 'required|string',
+//            'role' => 'required|string',
+//            'email' => 'required|string',
+//        ]);
 
-        $user = User::findOrFail($id);
-        $user->update($request->all());
+        $users = User::findOrFail($id);
+        $users->update($request->all());
+
     }
 }

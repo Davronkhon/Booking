@@ -7,11 +7,11 @@
         </div>
         <div class="card-body">
             <p>Вы уверены, что хотите удалить это бронирование?</p>
-            <form action="{{route('client.destroy', $client->id) }}" method="POST">
+            <form action="{{route('clients.destroy', $client->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Удалить</button>
-                <a href="{{route('client.index') }}" class="btn btn-secondary">Отмена</a>
+                <a href="{{route('clients.index') }}" class="btn btn-secondary">Отмена</a>
             </form>
         </div>
     </div>

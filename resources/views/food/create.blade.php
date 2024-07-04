@@ -18,7 +18,7 @@
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
-@extends('layouts.main')
+@extends('layouts.app')
 @section('content')
     <form action="{{route('food.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -28,50 +28,56 @@
                 <input type="text" name="name" class="form-control" id="exampleInputEmail1">
             </div>
         </div>
+        <br>
         <div class="card-body">
             <div class="form-group">
                 <label for="exampleInputEmail1">Price:</label>
-                <input type="text" name="price" class="form-control" id="exampleInputEmail1">
+                <input type="text" name="price" step="0.1" class="form-control" id="exampleInputEmail1">
             </div>
         </div>
+        <br>
         <div class="card-body">
             <label for="exampleInputEmail1">Image:</label>
             <input class="form-control" type="file" name="image">
         </div>
-
+        <br>
         <div class="card-body">
             <label for="exampleInputEmail1">Description:</label>
-            <input class="form-control" type="text" name="description">
+            <label>
+                <input class="form-control" type="text" name="description">
+            </label>
         </div>
-
+        <br>
 
         <div class="card-body">
             <label for="exampleInputEmail1">Time:</label>
-            <input class="form-control" type="time" name="time">
+            <label>
+                <input class="form-control" type="time" name="time">
+            </label>
         </div>
 
 
         <div class="card-body">
-            <label for="exampleInputEmail1">Is_active:</label>
-            <input class="form-control" type="text" name="is_active">
+            <label for="exampleInputEmail1">Is_active:</label><br>
+                 <input type="text" class="form-control" name="is_active"><br>
         </div>
-
+        <br>
         <div class="card-body">
             <label for="exampleInputEmail1">Food_Category:</label>
-            <select id="exampleInputEmail1" name="food_category_id">
+            <select id="exampleInputEmail1" class="form-control" name="food_category_id">
                 @foreach($food_categories as $food_category)
-                    <option value="{{$food_category->id}}">{{$food_category->name}}</option>
+                    <option value="{{$food_category->id}}" class="form-control">{{$food_category->name}}</option>
                 @endforeach
             </select>
         </div>
-
+        <br>
         <div class="card-body">
             <label for="exampleInputEmail1">Restaurant:</label>
-            <select id="exampleInputEmail1" name="restaurant_id">
+            <select id="exampleInputEmail1" class="form-control" name="restaurant_id">
                 @foreach($restaurants as $restaurant)
-                    <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
+                    <option value="{{$restaurant->id}}" class="form-control">{{$restaurant->name}}</option>
                 @endforeach~
-            </select>
+            </select><br>
         </div>
 
 

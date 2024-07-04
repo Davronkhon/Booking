@@ -1,39 +1,36 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Restaurant</title>
-</head>
-<body>
-<h1>Edit Restaurant</h1>
+@extends('layouts.app')
 
-<form action="{{ route('restaurants.update', $restaurant->id) }}" method="POST">
-    @csrf
-    @method('PUT')
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" value="{{ $restaurant->name }}" required>
+@section('title')
+    Добавление
+@endsection
+<!-- create -->
+@section('content')
+    <div class="container">
+        @if(session('message'))
+            <div class="alert alert-success">
+                {{session('message')}}
+            </div>
+        @endif
+        <form action="{{route('restaurant.index', $restaurants->id)}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <label for="">name : </label>
+            <input type="text" name="name" class="form-control" value="{{$restaurants->name}}">
+            <label for="">address : </label>
+            <input type="text" name="address" class="form-control" value="{{$restaurants->address}}">
+            <label for="">phone : </label>
+            <input type="text" name="phone" class="form-control" value="{{$restaurants->phone}}">
+            <label for="">email : </label>
+            <input type="email" name="email" class="form-control" value="{{$restaurants->email}}">
+            <label for="">rest_id : </label>
+            <select name="rest_id" id="" class="form-control">
+                @foreach($categories as $category)
+                    <option value="{{$category->id}}">{{$category->name}}</option>
+                @endforeach
+            </select>
+            <input type="submit" value="Добавить" class="btn btn-primary form-control">
+        </form>
     </div>
-    <div>
-        <label for="address">Address:</label>
-        <input type="text" name="address" id="address" value="{{ $restaurant->address }}" required>
-    </div>
-    <div>
-        <label for="phone">Phone:</label>
-        <input type="text" name="phone" id="phone" value="{{ $restaurant->phone }}" required>
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" value="{{ $restaurant->email }}" required>
-    </div>
-    <div>
-        <label for="category_rest_id">Category:</label>
-        <select name="category_rest_id" id="category_rest_id" required>
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}" {{ $category->id == $restaurant->category_rest_id ? 'selected' : '' }}>{{ $category->name }}</option>
-            @endforeach
-        </select>
-    </div>
-    <button type="submit">Update</button>
-</form>
-</body>
-</html>
+@endsection
+
+@section('footer')
+@endsection

@@ -18,8 +18,9 @@
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
-@extends('layouts.main')
+@extends('layouts.app')
 @section('content')
+
     <form action="{{route('client.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
@@ -36,7 +37,9 @@
         </div>
         <div class="card-body">
             <label for="exampleInputEmail1">Phone:</label>
-            <input class="form-control" type="text" name="phone">
+            <label>
+                <input class="form-control" type="text" name="phone">
+            </label>
         </div>
 
         <div class="card-body">

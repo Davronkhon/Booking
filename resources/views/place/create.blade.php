@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
         <h1>Create Place</h1>
-        <form action="{{ route('places.store') }}" method="POST">
+        <form action="{{ route('place.store') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -24,7 +24,14 @@
             </div>
             <div class="form-group">
                 <label for="restaurant_id">Restaurant ID:</label>
-                <input type="number" id="restaurant_id" name="restaurant_id" class="form-control" required>
+
+                <select class ="form-select" name="restaurant_id" id="">
+
+                    @foreach($restourants as $restourant)
+                        <option value="{{$restourant->id}}">{{$restourant->name}}</option>
+                    @endforeach
+                </select>
+
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </form>

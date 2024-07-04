@@ -2,42 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RestCategory;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
-use App\Models\RestCategory;
 
 class RestaurantController extends Controller
 {
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::with('restCategory')->get();
         return view('restaurant.index', compact('restaurants'));
     }
 
     public function create()
     {
-        return view('restaurant.create');
+        $restaurants = Restaurant::all();
+        $categories = RestCategory::all();
+        return view('restaurant.create', compact('categories', 'restaurants'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'rest_category_id' => 'required|exists:rest_categories,id',
+        $restaurants = $request->validate([
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'required|string',
+            'rest_category_id' => 'required|string',
         ]);
 
-        Restaurant::create([
-            'name' => $request->name,
-            'address' => $request->address,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'rest_category_id' => $request->rest_category_id,
-        ]);
-
-        return redirect()->route('restaurant.index')->with('success', 'Restaurants created successfully.');
+        Restaurant::create($restaurants);
+        return redirect()->route('restaurant.index')->with('success', 'Rest успешно добавлена');
     }
 
     public function show($id)
@@ -48,8 +43,9 @@ class RestaurantController extends Controller
 
     public function edit($id)
     {
+        $categories = RestCategory::all();
         $restaurants = Restaurant::findOrFail($id);
-        return view('restaurant.edit', compact('restaurants'));
+        return view('restaurant.edit', compact('restaurants', 'categories'));
     }
 
     public function update(Request $request, $id)

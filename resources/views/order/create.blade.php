@@ -11,20 +11,36 @@
                 {{session('message')}}
             </div>
         @endif
-        <form action="{{route('order.story')}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('order.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="">Заголовок : </label>
             <input type="text" name="title" class="form-control">
             <label for="">Текст : </label>
             <input type="text" name="text" class="form-control">
-            <label for="">Категория : </label>
-            <select name="category_id" id="" class="form-control">
-                @foreach($orders as $order)
-                    <option value="{{$order->id}}">{{$order->name}}</option>
+            <label for="">Booking : </label>
+            <select name="booking_id" id="" class="form-control">
+                @foreach($bookings as $booking)
+                    <option value="{{$booking->id}}">{{$booking->name}}</option>
                 @endforeach
             </select>
-            <label for="">Рисунок : </label>
-            <input type="file" name="image" class="form-control">
+
+
+            <label for="">Client: </label>
+            <select name="client_id" id="" class="form-control">
+                @foreach($clients as $client)
+                    <option value="{{$client->id}}">{{$client->name}}</option>
+                @endforeach
+            </select>
+
+
+            <label for="">Food : </label>
+            <select name="food_id" id="" class="form-control">
+                @foreach($foods as $food)
+                    <option value="{{$food->id}}">{{$food->name}}</option>
+                @endforeach
+            </select>
+
+            <br>
             <input type="submit" value="Добавить" class="btn btn-primary form-control">
         </form>
     </div>

@@ -1,108 +1,54 @@
-<?php
+@extends('layouts.app')
 
-namespace App\Http\Controllers;
+@section('content')
+    <h1>Create Restaurants</h1>
 
-use App\Models\Restaurant;
-use Illuminate\Http\Request;
+    <form action="{{ route('restaurant.store') }}" method="POST">
+        @csrf
 
-class RestaurantController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $restaurants = Restaurant::all();
-        return view('restaurants.index', compact('restaurants'));
-    }
+        <div class="form-group">
+            <label for="name">Name:</label><br>
+            <label>
+                <input type="text" name="name" class="form-control">
+            </label><br>
+        </div>
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('restaurants.create');
-    }
+        <div class="form-group">
+            <label for="password">Address:</label><br>
+            <label>
+                <input type="text" name="address" class="form-control">
+            </label><br>
+        </div>
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email',
-            'category_rest_id' => 'required',
-        ]);
+        <div class="form-group">
+            <label for="role">Phone:</label><br>
+            <label>
+                <input type="text" name="phone" class="form-control">
+            </label><br>
+        </div>
 
-        Restaurant::create($request->all());
+        <div class="form-group">
+            <label for="email">Email:</label><br>
+            <input type="email" name="email" class="form-control"><br>
+        </div>
 
-        return redirect()->route('restaurants.index')->with('success', 'Restaurant created successfully.');
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Restaurant  $restaurant
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Restaurant $restaurant)
-    {
-        return view('restaurants.show', compact('restaurant'));
-    }
+        <label for="">Rest_Category: </label><br>
+        <select name="rest_category_id" id="" class="form-control">
+            @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select><br>
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Restaurant  $restaurant
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Restaurant $restaurant)
-    {
-        return view('restaurants.edit', compact('restaurant'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Restaurant  $restaurant
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Restaurant $restaurant)
-    {
-        $request->validate([
-            'name' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email',
-            'category_rest_id' => 'required',
-        ]);
-
-        $restaurant->update($request->all());
-
-        return redirect()->route('restaurants.index')->with('success', 'Restaurant updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Restaurant  $restaurant
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Restaurant $restaurant)
-    {
-        $restaurant->delete();
-
-        return redirect()->route('restaurants.index')->with('success', 'Restaurant deleted successfully.');
-    }
-}
+        <button type="submit" class="btn btn-primary">Create Restaurant</button>
+    </form>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+@endsection

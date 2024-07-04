@@ -1,34 +1,46 @@
 @extends('layouts.app')
 
-@section('title')
-    Добавление
-@endsection
-<!-- create -->
 @section('content')
-    <div class="container">
-        @if(session('message'))
-            <div class="alert alert-success">
-                {{session('message')}}
-            </div>
-        @endif
-        <form action="{{route('user.story')}}" method="post" enctype="multipart/form-data">
-            @csrf
-            <label for="">Заголовок : </label>
-            <input type="text" name="title" class="form-control">
-            <label for="">Текст : </label>
-            <input type="text" name="text" class="form-control">
-            <label for="">Категория : </label>
-            <select name="category_id" id="" class="form-control">
-                @foreach($users as $user)
-                    <option value="{{$user->id}}">{{$user->name}}</option>
-                @endforeach
-            </select>
-            <label for="">Рисунок : </label>
-            <input type="file" name="image" class="form-control">
-            <input type="submit" value="Добавить" class="btn btn-primary form-control">
-        </form>
-    </div>
-@endsection
+    <h1>Create User</h1>
 
-@section('footer')
+    <form action="{{ route('user.store') }}" method="POST">
+        @csrf
+
+        <div class="form-group">
+            <label for="name">Username:</label><br>
+            <label>
+                <input type="text" name="username" class="form-control">
+            </label><br>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label><br>
+            <label>
+                <input type="password" name="password" class="form-control">
+            </label><br>
+        </div>
+
+        <div class="form-group">
+            <label for="role">Role:</label><br>
+            <label>
+                <input type="text" name="role" class="form-control">
+            </label><br>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label><br>
+            <input type="email" name="email" class="form-control"><br>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create User</button>
+    </form>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 @endsection

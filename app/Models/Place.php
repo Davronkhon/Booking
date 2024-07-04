@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Place extends Model
 {
+
     use HasFactory;
+    protected $table = "places";
     protected $fillable = ['restaurant_id', 'name', 'number', 'description', 'capacity'];
 
     public function restaurants()

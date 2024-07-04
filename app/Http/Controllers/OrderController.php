@@ -2,34 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
+use App\Models\Client;
+use App\Models\Food;
 use Illuminate\Http\Request;
-use App\Http\Models\Order;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
     public function index()
     {
-        $clients = Order::all();
-        return view('clients.index', compact('clients'));
+        $orders = Order::all();
+        return view('order.index', compact('orders'));
     }
     public function create()
     {
-        return view('order.create');
+        $bookings = Booking::all();
+        $clients = Client::all();
+        $foods = Food::all();
+        return view('order.create', compact('bookings', 'clients', 'foods'));
     }
-    public function destroy(Order $order, $id)
+    public function destroy(Order $orders, $id)
     {
-        $order = Order::findOrFail($id);
-        $order->delete();
+        $orders = Order::findOrFail($id);
+        $orders->delete();
     }
-    public function edit(Order $order, $id)
+    public function edit(Order $orders, $id)
     {
-        $order = Order::findOrFail($id);
-        return view('order.edit', compact('order'));
+        $orders = Order::findOrFail($id);
+        return view('order.edit', compact('orders'));
     }
-    public function show(Order $order, $id)
+    public function show(Order $orders, $id)
     {
-        $order = Order::findOrFail($id);
-        return view('order.show', compact('order'));
+        $orders = Order::findOrFail($id);
+        return view('order.show', compact('orders'));
     }
     public function store(Request $request)
     {
@@ -54,7 +60,7 @@ class OrderController extends Controller
             'restaurant_id' => 'required|exists:restaurants,id'
         ]);
 
-        $order = Order::findOrFail($id);
-        $order->update($request->all());
+        $orders = Order::findOrFail($id);
+        $orders->update($request->all());
     }
 }
