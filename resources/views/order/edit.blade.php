@@ -4,36 +4,72 @@
     <div class="container">
         @if(session('message'))
             <div class="alert alert-success">
-                {{session('message')}}
+                {{ session('message') }}
             </div>
         @endif
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{ route('order.update', $order->id) }}" method="POST">
             @csrf
             @method('PUT')
-            <label for="">Quantity</label>
-            <input type="text" class="form-control" id="" name="quantity" value="{{$order->quantity}}">
-            <label for="">Order_dat</label>
-            <input type="date" class="form-control" id="" name="date" value="{{$order->date}}">
-            <label for="">Status</label>
-            <input type="text" class="form-control" id="" name="status" value="{{$order->status}}">
-            <label for="">Booking_id : </label>
-            <select name="booking_id" id="" class="form-control">
-                @foreach($bookings as $booking)
-                    <option value="{{$booking->id}}">{{$booking->name}}</option>
-                @endforeach
-            </select>
-            <label for="">Food_id : </label>
-            <select name="food_id" id="" class="form-control">
-                @foreach($foods as $food)
-                    <option value="{{$food->id}}">{{$food->name}}</option>
-                @endforeach
-            </select>
-            <label for="">Client_id : </label>
-            <select name="client_id" id="" class="form-control">
-                @foreach($clients as $client)
-                    <option value="{{$client->id}}">{{$client->name}}</option>
-                @endforeach
-            </select>
+
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="text" class="form-control" id="quantity" name="quantity" value="{{ old('quantity', $order->quantity) }}">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Order Date</label>
+                <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $order->date) }}">
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <input type="text" class="form-control" id="status" name="status" value="{{ old('status', $order->status) }}">
+            </div>
+
+            <div class="form-group">
+                <label for="booking_id">Booking</label>
+                <select name="booking_id" id="booking_id" class="form-control">
+                    @foreach($bookings as $booking)
+                        <option value="{{ $booking->id }}" {{ $order->booking_id == $booking->id ? 'selected' : '' }}>
+                            {{ $booking->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="food_id">Food</label>
+                <select name="food_id" id="food_id" class="form-control">
+                    @foreach($foods as $food)
+                        <option value="{{ $food->id }}" {{ $order->food_id == $food->id ? 'selected' : '' }}>
+                            {{ $food->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="client_id">Client</label>
+                <select name="client_id" id="client_id" class="form-control">
+                    @foreach($clients as $client)
+                        <option value="{{ $client->id }}" {{ $order->client_id == $client->id ? 'selected' : '' }}>
+                            {{ $client->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <input type="submit" value="Добавить" class="btn btn-primary form-control">
         </form>
     </div>
