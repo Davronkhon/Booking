@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Добавление
+    Добавление распоряжения
 @endsection
 <!-- create -->
 @section('content')
@@ -17,7 +17,7 @@
             <input type="text" name="title" class="form-control">
             <label for="">Текст : </label>
             <input type="text" name="text" class="form-control">
-            <label for="">Booking : </label>
+            <label for="">Бронирование : </label>
             <select name="booking_id" id="" class="form-control">
                 @foreach($bookings as $booking)
                     <option value="{{$booking->id}}">{{$booking->name}}</option>
@@ -25,7 +25,7 @@
             </select>
 
 
-            <label for="">Client: </label>
+            <label for="">Клиент: </label>
             <select name="client_id" id="" class="form-control">
                 @foreach($clients as $client)
                     <option value="{{$client->id}}">{{$client->name}}</option>
@@ -33,7 +33,7 @@
             </select>
 
 
-            <label for="">Food : </label>
+            <label for="">Блюдо : </label>
             <select name="food_id" id="" class="form-control">
                 @foreach($foods as $food)
                     <option value="{{$food->id}}">{{$food->name}}</option>

@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+    <h1>Список блюд</h1>
     @if(session('message'))
         <div class="alert alert-danger">
             {{session('message')}}
@@ -17,8 +18,8 @@
     <table class="table">
         <tr>
             <th>#</th>
-            <th>Name</th>
-            <th>Description</th>
+            <th>Имя</th>
+            <th>Подробности</th>
             <th>Удалить</th>
             <th>Изменить</th>
         </tr>

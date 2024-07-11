@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Users</h1>
+    <h1>Список пользователей</h1>
 
-    <a href="{{ route('user.create') }}" class="btn btn-primary">Create User</a>
+    <a href="{{ route('user.create') }}" class="btn btn-primary">Добавить пользователья</a>
 
     <table class="table">
         <thead>
         <tr>
             <th>#</th>
-            <th>username</th>
-            <th>role</th>
+            <th>Имя</th>
+            <th>Роль</th>
             <th>Email</th>
         </tr>
         </thead>

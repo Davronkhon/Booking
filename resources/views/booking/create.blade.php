@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Добавление
+    Добавление бронирования
 @endsection
 <!-- create -->
 @section('content')
@@ -13,22 +13,39 @@
         @endif
         <form action="{{route('booking.store')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <label for="">Начало времени: </label><br>
-            <label>
-                <input type="date" name="title" class="form-control">
-            </label><br>
-            <label for="">Конец времени: </label><br>
-            <label>
-                <input type="date" name="text" class="form-control">
-            </label><br>
-            <label for="">Гости: </label><br>
-            <label>
-                <input type="text" name="guests_count" class="form-control">
-            </label><br>
-            <label for="">Статус: </label><br>
-            <label>
-                <input type="text" name="status" class="form-control">
-            </label><br>
+
+            <div class="bootstrap-timepicker">
+                <div class="form-group">
+                    <label>Начало времени:</label>
+
+                    <div class="input-group date" id="timepicker" data-target-input="nearest">
+                        <input type="text" name="start_time" class="form-control datetimepicker-input" data-target="#timepicker"/>
+                        <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
+                            <div class="input-group-text"><i class="far fa-clock"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="bootstrap-timepicker">
+                        <div class="form-group">
+                            <label>Конец времени:</label>
+
+                            <div class="input-group date" id="timepicker" data-target-input="nearest">
+                                <input type="text" name="end_time" class="form-control datetimepicker-input" data-target="#timepicker"/>
+                                <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="far fa-clock"></i></div>
+                                </div>
+                            </div>
+
+                                <div class="form-group">
+                                    <label for="">Гости:</label>
+                                    <input type="text" name="guests_count" class="form-control" id="">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="">Статус:</label>
+                                    <input type="text" name="status" class="form-control" id="">
+                                </div>
+
             <label for="">Место: </label><br>
             <select name="place_id" id="" class="form-control">
                 @foreach($places as $place)

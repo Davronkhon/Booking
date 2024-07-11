@@ -20,50 +20,58 @@
 <body class="hold-transition sidebar-mini">
 @extends('layouts.app')
 @section('content')
+    <h1>Добавить блюда</h1>
+
     <form action="{{route('food.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
             <div class="form-group">
-                <label for="exampleInputEmail1">Name:</label>
+                <label for="exampleInputEmail1">Название:</label>
                 <input type="text" name="name" class="form-control" id="exampleInputEmail1">
             </div>
         </div>
         <br>
         <div class="card-body">
             <div class="form-group">
-                <label for="exampleInputEmail1">Price:</label>
+                <label for="exampleInputEmail1">Цена:</label>
                 <input type="text" name="price" step="0.1" class="form-control" id="exampleInputEmail1">
             </div>
         </div>
         <br>
         <div class="card-body">
-            <label for="exampleInputEmail1">Image:</label>
+            <label for="exampleInputEmail1">Фото:</label>
             <input class="form-control" type="file" name="image">
         </div>
         <br>
+
+
         <div class="card-body">
-            <label for="exampleInputEmail1">Description:</label>
-            <label>
-                <input class="form-control" type="text" name="description">
-            </label>
+            <div class="form-group">
+                <label for="exampleInputEmail1">Подробности:</label>
+                <input type="text" name="description" class="form-control" id="">
+            </div>
         </div>
         <br>
 
-        <div class="card-body">
-            <label for="exampleInputEmail1">Time:</label>
-            <label>
-                <input class="form-control" type="time" name="time">
-            </label>
-        </div>
+        <div class="bootstrap-timepicker">
+            <div class="form-group">
+                <label>Время:</label>
+
+                <div class="input-group date" id="timepicker" data-target-input="nearest">
+                    <input type="text" name="time" class="form-control datetimepicker-input" data-target="#timepicker"/>
+                    <div class="input-group-append" data-target="#timepicker" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="far fa-clock"></i></div>
+                    </div>
+                </div>
 
 
-        <div class="card-body">
-            <label for="exampleInputEmail1">Is_active:</label><br>
+                <div class="card-body">
+            <label for="exampleInputEmail1">Активно:</label><br>
                  <input type="text" class="form-control" name="is_active"><br>
         </div>
         <br>
         <div class="card-body">
-            <label for="exampleInputEmail1">Food_Category:</label>
+            <label for="exampleInputEmail1">Категория еды:</label>
             <select id="exampleInputEmail1" class="form-control" name="food_category_id">
                 @foreach($food_categories as $food_category)
                     <option value="{{$food_category->id}}" class="form-control">{{$food_category->name}}</option>
@@ -72,7 +80,7 @@
         </div>
         <br>
         <div class="card-body">
-            <label for="exampleInputEmail1">Restaurant:</label>
+            <label for="exampleInputEmail1">Ресторан:</label>
             <select id="exampleInputEmail1" class="form-control" name="restaurant_id">
                 @foreach($restaurants as $restaurant)
                     <option value="{{$restaurant->id}}" class="form-control">{{$restaurant->name}}</option>
@@ -81,7 +89,7 @@
         </div>
 
 
-        <button type="submit">Добавление</button>
+        <button class="form-control bg-info" type="submit">Добавление</button>
     </form>
 @endsection
 </body>

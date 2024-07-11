@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Добавление
+    Добавление блюда
 @endsection
 <!-- create -->
 @section('content')
@@ -13,9 +13,9 @@
         @endif
         <form action="{{route('foodcat.store')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <label for="">Name : </label>
+            <label for="">Имя : </label>
             <input type="text" name="name" class="form-control">
-            <label for="">Description : </label>
+            <label for="">Подробности : </label>
             <input type="text" name="description" class="form-control">
             <input type="submit" value="Добавить" class="btn btn-primary form-control">
         </form>

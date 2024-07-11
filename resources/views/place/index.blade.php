@@ -3,17 +3,17 @@
 
 @section('content')
     <div class="container">
-        <h1>Places List</h1>
-        <a href="{{ route('place.create') }}" class="btn btn-primary mb-3">Create New Place</a>
+        <h1>Список мест</h1>
+        <a href="{{ route('place.create') }}" class="btn btn-primary mb-3">Добавить новое место</a>
         <table class="table">
             <thead>
             <tr>
-                <th>Name</th>
-                <th>Number</th>
-                <th>Description</th>
-                <th>Capacity</th>
-                <th>Restaurant ID</th>
-                <th>Actions</th>
+                <th>Название</th>
+                <th>Номер</th>
+                <th>Подробности</th>
+                <th>Город</th>
+                <th>Ресторан</th>
+                <th>Активно</th>
             </tr>
             </thead>
             <tbody>

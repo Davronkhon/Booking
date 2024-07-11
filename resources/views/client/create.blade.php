@@ -20,30 +20,36 @@
 <body class="hold-transition sidebar-mini">
 @extends('layouts.app')
 @section('content')
+    <h1>Добавить клиента</h1>
 
     <form action="{{route('client.store')}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="card-body">
             <div class="form-group">
-                <label for="exampleInputEmail1">Name:</label>
+                <label for="exampleInputEmail1">Имя:</label>
                 <input type="text" name="name" class="form-control" id="exampleInputEmail1">
             </div>
         </div>
         <div class="card-body">
             <div class="form-group">
-                <label for="exampleInputEmail1">Surname:</label>
+                <label for="exampleInputEmail1">Фамилия:</label>
                 <input type="text" name="surname" class="form-control" id="exampleInputEmail1">
             </div>
         </div>
-        <div class="card-body">
-            <label for="exampleInputEmail1">Phone:</label>
-            <label>
-                <input class="form-control" type="text" name="phone">
-            </label>
+
+        <div class="form-group">
+            <label for="">Телефон:</label><br>
+
+            <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-phone"></i></span>
+            </div>
+            <input type="text" name="phone" class="form-control" placeholder="phone">
+        </div>
         </div>
 
         <div class="card-body">
-            <label for="exampleInputEmail1">User:</label>
+            <label for="exampleInputEmail1">Пользователь:</label><br>
             <select id="exampleInputEmail1" name="user_id">
                 @foreach($users as $user)
                     <option value="{{$user->id}}">{{$user->name}}</option>
@@ -52,16 +58,16 @@
         </div>
 
         <div class="card-body">
-            <label for="exampleInputEmail1">Restaurant:</label>
-            <select id="exampleInputEmail1" name="restaurant_id">
+            <label for="exampleInputEmail1">Рестаран:</label><br>
+            <select id="exampleInputEmail1" name="restaurant_id" class="form-control">
                 @foreach($restaurants as $restaurant)
                     <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
                 @endforeach
             </select>
         </div>
+        <br>
 
-
-        <button type="submit">Добавление</button>
+        <button class="form-control bg-info" type="submit">Добавление</button>
     </form>
 @endsection
 </body>

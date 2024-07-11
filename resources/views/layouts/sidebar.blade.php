@@ -24,107 +24,248 @@
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
+
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
-                <a href="{{ route('user.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Добавить users
+            <!-- Add icons to the links using the .nav-icon class
+                 with font-awesome or any other icon font library -->
+             <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-users"></i>
+                        <p>
+                        Пользаватели
+                        <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('user.index') }}" class="nav-link">
+                        <i class="fas fa-user check"></i>
+                            <p>Список пользователей</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('user.create') }}" class="nav-link">
+                        <i class="fas fa-user-plus"></i>
+                            <p>Добавить пользователя</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+           </ul>
+
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-menorah"></i>
+                    <p>
+                        Категории еды
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('foodcat.index') }}" class="nav-link">
+                            <i class="fas fa-list-ol"></i>
+                            <p>Список блюд</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('foodcat.create') }}" class="nav-link">
+                            <i class="fas fa-book-medical"></i>
+                            <p>Добавить блюда</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-utensils"></i>
+                    <p>
+                        Категория ресторанов
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('rest.index') }}" class="nav-link">
+                            <i class="far fa-window-restore"></i>
+                            <p>Список категория ресторанов</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('rest.create') }}" class="nav-link">
+                            <i class="far fa-calendar-plus"></i>
+                            <p>Добавить категория ресторана</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-mug-hot"></i>
+                    <p>
+                        Рестораны
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('restaurant.index') }}" class="nav-link">
+                            <i class="fas fa-registered"></i>
+                            <p>Список ресторанов</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('restaurant.create') }}" class="nav-link">
+                            <i class="fas fa-notes-medical"></i>
+                            <p>Добавить рестораны</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-portrait"></i>
+                    <p>
+                        Клиенты
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('client.index') }}" class="nav-link">
+                            <i class="fas fa-address-card"></i>
+                            <p>Список клиентов</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('client.create') }}" class="nav-link">
+                            <i class="fas fa-user-tie"></i>
+                            <p>Добавить клиента</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="fas fa-book-reader"></i>
+                    <p>
+                        Меню
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('food.index') }}" class="nav-link">
+                            <i class="fas fa-book"></i>
+                            <p>Список блюд</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('food.create') }}" class="nav-link">
+                            <i class="fas fa-cookie-bite"></i>
+                            <p>Добавить блюда</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
 
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ route('foodcat.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                <a href="#" class="nav-link">
+                    <i class="fab fa-bootstrap"></i>
                     <p>
-                        Добавить foodcats
+                        Бронировать место
+                        <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('place.index') }}" class="nav-link">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>Список мест</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('place.create') }}" class="nav-link">
+                            <i class="fas fa-chair"></i>
+                            <p>Бронировать место</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
 
 
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ route('rest.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                <a href="#" class="nav-link">
+                    <i class="fab fa-shopify"></i>
                     <p>
-                        Добавить restcats
+                        Заказать
+                        <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('booking.index') }}" class="nav-link">
+                            <i class="fas fa-clipboard-list"></i>
+                            <p>Список заказов</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('booking.create') }}" class="nav-link">
+                            <i class="fas fa-cart-arrow-down"></i>
+                            <p>Сделать заказ</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
 
 
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ route('restaurant.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-shipping-fast"></i>
                     <p>
-                        Добавить restaurant
+                        Pаспоряжение
+                        <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('order.index') }}" class="nav-link">
+                            <i class="fas fa-layer-group"></i>
+                            <p>Список распоряжение</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('order.create') }}" class="nav-link">
+                            <i class="fas fa-notes-medical"></i>
+                            <p>Сделать распоряжение</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
-
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
-                <a href="{{ route('client.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Добавить clients
-                    </p>
-                </a>
-            </li>
-        </ul>
-
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
-                <a href="{{ route('food.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Добавить foods
-                    </p>
-                </a>
-            </li>
-        </ul>
-
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
-                <a href="{{ route('place.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Добавить places
-                    </p>
-                </a>
-            </li>
-        </ul>
-
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
-                <a href="{{ route('booking.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Добавить bookings
-                    </p>
-                </a>
-            </li>
-        </ul>
-
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            <li class="nav-item">
-                <a href="{{ route('order.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Добавить orders
-                    </p>
-                </a>
-            </li>
-        </ul>
-
 
     </nav>
     <!-- /.sidebar-menu -->

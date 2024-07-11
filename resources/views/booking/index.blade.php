@@ -13,16 +13,16 @@
             {{session('message2')}}
         </div>
     @endif
-    <a href="{{route('booking.create')}}" class="btn btn-primary">Добавить</a>
+    <a href="{{route('booking.create')}}" class="btn btn-primary">Добавить бронаирование</a>
     <table class="table">
         <tr>
             <th>#</th>
-            <th>Start_time</th>
-            <th>End_time</th>
-            <th>Guests</th>
-            <th>Status</th>
-            <th>Place_id</th>
-            <th>Client_id</th>
+            <th>Начало времени</th>
+            <th>Конец времени</th>
+            <th>Гости</th>
+            <th>Статус</th>
+            <th>Место</th>
+            <th>Клиенты</th>
             <th>Удалить</th>
             <th>Изменить</th>
         </tr>
