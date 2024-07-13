@@ -11,7 +11,7 @@ class FoodController extends Controller
 {
     public function index()
     {
-        $foods = Food::with(['restaurant', 'food_category'])->get();
+        $foods = Food::with(['restaurant', 'foodcategory'])->get();
         return view('food.index', compact('foods'));
     }
 
@@ -25,15 +25,18 @@ class FoodController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
+        $data = $request->validate([
             'food_category_id' => 'required|exists:food_categories,id',
             'restaurant_id' => 'required|exists:restaurants,id',
             'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
+            'price' => 'required',
+            'description' => 'required',
+            'time' => 'required',
+            'is_active' => 'required',
         ]);
 
-        $data = $request->all();
+        //$data = $request->all();
 
         if ($request->hasFile('image')) {
             $imageName = time() . '.' . $request->image->extension();
@@ -61,6 +64,7 @@ class FoodController extends Controller
             'description' => 'required',
             'time' => 'required',
             'is_active' => 'required',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
         $foods = Food::findOrFail($id);
         $foods->foodcategory_id = $request->food_category_id;
@@ -70,6 +74,7 @@ class FoodController extends Controller
         $foods->description = $request->description;
         $foods->time = $request->time;
         $foods->is_active = $request->is_active;
+        $foods->image = $request->image;
         $foods->save();
         return redirect()->route('food.index')->with('success', 'foods updated successfully.');
     }

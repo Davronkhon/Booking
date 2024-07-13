@@ -11,7 +11,7 @@
             @csrf
             @method('PUT')
             <label for="">Quantity</label>
-            <input type="text" class="form-control" id="" name="quantity" value="{{$order->quantity}}">
+            <input type="number" class="form-control" id="" name="quantity" value="{{$order->quantity}}">
             <label for="">Order_dat</label>
             <input type="date" class="form-control" id="" name="date" value="{{$order->date}}">
             <label for="">Status</label>

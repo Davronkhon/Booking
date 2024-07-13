@@ -109,19 +109,22 @@ class BookingController extends Controller
         $validated = $request->validate([
             'start_time' => 'required|date',
             'end_time' => 'required|date|after_or_equal:start_time',
-            'guests' => 'required|integer|min:1',
+            'guests_count' => 'required|integer|min:1',
             'status' => 'required|string',
             'place_id' => 'required|exists:places,id',
             'client_id' => 'required|exists:clients,id',
         ]);
-        Booking::create($validated);
 
-        //DB::transaction(function () use ($validated) {
-            //Booking::create($validated);
-        //});
+        $validated['start_time'] = date('Y-m-d H:i:s', strtotime($validated['start_time']));
+        $validated['end_time'] = date('Y-m-d H:i:s', strtotime($validated['end_time']));
+
+        DB::transaction(function () use ($validated) {
+            Booking::create($validated);
+        });
 
         return redirect()->route('booking.index')->with('message', 'Бронирование успешно создано!');
     }
+
 
     public function show($id)
     {
