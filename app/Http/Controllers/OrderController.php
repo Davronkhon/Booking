@@ -11,6 +11,8 @@ class OrderController extends Controller
 {
     public function index()
     {
+        $orders = Order::with('food', 'booking')->get();
+        return view('order.index', compact('orders'));
         $orders = Order::all();
         $bookings = Booking::with('orders' )->get();
         return view('order.index', compact('bookings', 'orders'));
@@ -53,19 +55,17 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $order = $request->validate([
-            'quantity' => 'required|string',
+            'quantity' => 'required|integer|min:1',
             'date' => 'required|string',
             'status' => 'required|string',
             'booking_id' => 'required|exists:bookings,id',
-            'food_id' => 'required|exists:food,id',
+            'food_id' => 'required|exists:foods,id',
             'client_id' => 'required|exists:clients,id',
         ]);
 
+        $order['order_datetime'] = now();
         $order['order_datetime'] = $order['date'];
         unset($order['date']);
-        Order::create($order);
-
-        return redirect()->route('order.index')->with('success', 'Order');
         Order::create($order);
         return redirect()->route('order.index')->with('success', 'Order');
     }
