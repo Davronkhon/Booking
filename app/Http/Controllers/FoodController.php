@@ -29,6 +29,7 @@ class FoodController extends Controller
             'restaurant_id' => 'required|exists:restaurants,id',
             'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'price' => 'required|integer|min:1',
             'price' => 'required',
             'description' => 'required',
             'time' => 'required',
@@ -58,10 +59,11 @@ class FoodController extends Controller
         $request->validate([
             'food_category_id' => 'required|exists:food_categories,id',
             'restaurant_id' => 'required|exists:restaurants,id',
-            'name' => 'required',
-            'price' => 'required',
+            'name' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'price' => 'required|integer|min:1',
             'description' => 'required',
-            'time' => 'required',
+            'time' => 'required|date_format:H:i:s',
             'is_active' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);

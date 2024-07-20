@@ -14,12 +14,10 @@ class Order extends Model
     {
         return $this->belongsTo(Booking::class);
     }
-
     public function food()
     {
         return $this->belongsTo(Food::class, 'food_id');
     }
-
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id');

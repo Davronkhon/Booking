@@ -13,10 +13,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('booking_id')->constrained();
-            $table->foreignId('food_id')->constrained();
+            $table->unsignedBigInteger('booking_id');
+            $table->foreign('booking_id')->references('id')->on('bookings');
+            $table->unsignedBigInteger('food_id');
+            $table->foreign('food_id')->references('id')->on('foods');
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients');
             $table->unsignedInteger('quantity');
-            $table->foreignId('client_id')->constrained();
             $table->dateTime('order_datetime');
             $table->string('status');
             $table->timestamps();
@@ -31,3 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('orders');
     }
 };
+

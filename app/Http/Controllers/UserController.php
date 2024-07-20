@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -19,9 +21,17 @@ class UserController extends Controller
     }
     public function destroy($id)
     {
-        $users = User::findOrFail($id);
-        $users->delete();
-        return redirect('/user')->with('success', 'User deleted successfully');
+        try {
+            DB::beginTransaction();
+            DB::table('users')->where('id', $id)->delete();
+            DB::commit();
+
+            return redirect()->route('user.index')->with('success', 'Пользователь успешно удален');
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return redirect()->route('user.index')->with('error', 'Ошибка при удалении пользователя: ' . $e->getMessage());
+        }
     }
     public function edit($id)
     {

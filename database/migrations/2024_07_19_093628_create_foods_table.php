@@ -6,12 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-/*
-* Run the migrations.
-*/
+    /*
+    * Run the migrations.
+    */
     public function up(): void
     {
-        Schema::create('food', function (Blueprint $table) {
+        Schema::create('foods', function (Blueprint $table) {
             $table->id();
             $table->foreignId('food_category_id')->constrained('food_categories');
             $table->foreignId('restaurant_id')->constrained('restaurants');
@@ -19,15 +19,15 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->string('image');
             $table->text('description');
-            $table->dateTime('time');
+            $table->time('time');
             $table->string('is_active');
             $table->timestamps();
         });
     }
 
-/*
-* Reverse the migrations.
-*/
+    /*
+    * Reverse the migrations.
+    */
     public function down(): void
     {
         Schema::dropIfExists('food');

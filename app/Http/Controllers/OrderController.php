@@ -54,7 +54,7 @@ class OrderController extends Controller
 
     public function store(Request $request)
     {
-        $order = $request->validate([
+        $orders = $request->validate([
             'quantity' => 'required|integer|min:1',
             'date' => 'required|string',
             'status' => 'required|string',
@@ -62,7 +62,8 @@ class OrderController extends Controller
             'food_id' => 'required|exists:foods,id',
             'client_id' => 'required|exists:clients,id',
         ]);
-
+        $request['order_datetime'] = now();
+        Order::create($orders);
         $order['order_datetime'] = now();
         $order['order_datetime'] = $order['date'];
         unset($order['date']);
@@ -73,7 +74,7 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $order = $request->validate([
-            'quantity' => 'required|string',
+            'quantity' => 'required|integer|min:1',
             'date' => 'required|string',
             'status' => 'required|string',
             'booking_id' => 'required|exists:bookings,id',

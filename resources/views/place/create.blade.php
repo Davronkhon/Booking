@@ -19,7 +19,7 @@
                     @foreach($restourants as $restourant)
                         <option value="{{$restourant->id}}">{{$restourant->name}}</option>
                     @endforeach
-                </select>
+                </select><br>
             <input type="submit" value="Create" class="btn btn-primary form-control">
         </form>
     </div>
