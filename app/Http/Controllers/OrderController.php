@@ -12,9 +12,8 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::with('food')->get();
-        $bookings = Booking::with('booking')->get();
-        return view('order.index', compact('orders',  'bookings'));
+        $orders = Order::with('food', 'booking')->get();
+        return view('order.index', compact('orders'));
     }
     public function create()
     {
@@ -46,23 +45,23 @@ class OrderController extends Controller
     }
     public function store(Request $request)
     {
-        //dd($request);
-        $order = $request->validate([
-            'quantity' => 'required|string',
-            'date' => 'required|string',
+        $orders = $request->validate([
+            'quantity' => 'required|string|min:1',
+            'order_datetime' => 'required|string',
             'status' => 'required|string',
-            'booking_id' => 'required|exists:users,id',
-            'food_id' => 'required|exists:restaurants,id',
-            'client_id' => 'required|exists:restaurants,id',
+            'booking_id' => 'required|exists:bookings,id',
+            'food_id' => 'required|exists:foods,id',
+            'client_id' => 'required|exists:clients,id',
         ]);
 
-        Order::create($order);
+        $request['order_datetime'] = now();
+        Order::create($orders);
         return redirect()->route('order.index')->with('success', 'Order');
     }
     public function update(Request $request, $id)
     {
         $order = $request->validate([
-            'quantity' => 'required|string',
+            'quantity' => 'required|integer|min:1',
             'date' => 'required|string',
             'status' => 'required|string',
             'booking_id' => 'required|exists:users,id',

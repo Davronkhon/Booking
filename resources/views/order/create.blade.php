@@ -16,7 +16,7 @@
             <label for="">Quantity : </label>
             <input type="number" name="quantity" class="form-control">
             <label for="">DateTime : </label>
-            <input type="datetime-local" name="date" class="form-control">
+            <input type="datetime-local" name="order_datetime" class="form-control">
             <label for="">Status : </label>
             <input type="text" name="status" class="form-control">
             <label for="">Booking_id : </label>

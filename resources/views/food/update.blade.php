@@ -15,58 +15,38 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('admin.food.update', $food->id) }}" method="POST">
+            <form action="{{ route('food.update', $food->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <label for="date">Name:</label>
-                    <input type="date" class="form-control" name="name" value="{{$food->name}}">
-                </div>
-                <div class="form-group">
-                    <label for="time">Price:</label>
-                    <input type="time" class="form-control" name="price" value="{{$food->price}}">
-                </div>
-                <div class="form-group">
-                    <label for="seats">Image:</label>
-                    <input type="file" class="form-control" name="image" value="{{$food->image}}">
-                </div>
-
-                <div class="form-group">
-                    <label for="seats">Description:</label>
-                    <input type="text" class="form-control" name="description" value="{{$food->description}}">
-                </div>
-
-
-                <div class="form-group">
-                    <label for="seats">Time:</label>
-                    <input type="time" class="form-control" name="time" value="{{$food->time}}">
-                </div>
-
-
-                <div class="form-group">
-                    <label for="seats">Is_active:</label>
-                    <input type="text" class="form-control" name="is_active" value="{{$food->is_active}}">
-                </div>
-
-                <div class="card-body">
-                    <label for="exampleInputEmail1">Food_category:</label>
-                    <select id="exampleInputEmail1" name="food_category_id">
-                        @foreach($foodcats as $foodcat)
-                            <option value="{{$foodcat->id}}">{{$foodcat->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="card-body">
-                    <label for="exampleInputEmail1">Restaurant:</label>
-                    <select id="exampleInputEmail1" name="restaurant_id">
-                        @foreach($restaurants as $restaurant)
-                            <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Сохранить</button>
-                <a href="{{ route('food.index') }}" class="btn btn-secondary">Отмена</a>
+                <label for="date">Name:</label>
+                <input type="date" class="form-control" name="name" value="{{$food->name}}">
+                <label for="time">Price:</label>
+                <input type="time" class="form-control" name="price" value="{{$food->price}}">
+                <label for="seats">Image:</label>
+                <input type="file" class="form-control" name="image" value="{{$food->image}}">
+                <label for="seats">Description:</label>
+                <input type="text" class="form-control" name="description" value="{{$food->description}}">
+                <label for="seats">Time:</label>
+                <input type="datetime-local" class="form-control" name="time" value="{{$food->time}}">
+                <label for="seats">Is_active:</label>
+                <input type="text" class="form-control" name="is_active" value="{{$food->is_active}}">
+                <label for="exampleInputEmail1">Food_category:</label>
+                <select id="exampleInputEmail1" name="food_category_id" class="form-control">
+                    @foreach($foodcats as $foodcat)
+                        <option value="{{$foodcat->id}}">{{$foodcat->name}}</option>
+                    @endforeach
+                </select>
+                <label for="exampleInputEmail1">Restaurant:</label>
+                <select id="exampleInputEmail1" name="restaurant_id" class="form-control">
+                    @foreach($restaurants as $restaurant)
+                        <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
+                    @endforeach
+                </select>
+                <a href="{{ route('food.index') }}" class="btn btn-secondary form-control">Отмена</a>
             </form>
         </div>
     </div>
+@endsection
+
+@section('footer')
 @endsection

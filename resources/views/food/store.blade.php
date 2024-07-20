@@ -37,8 +37,8 @@
                 <td>{{$food->description}}</td>
                 <td>{{$food->time}}</td>
                 <td>{{$food->is_active}}</td>
-                <td>{{$food->foodcategory->name}}</td>
-                <td>{{$food->restaurant->name}}</td>
+                <td>{{$food->food_category_id->name}}</td>
+                <td>{{$food->restaurant_id->name}}</td>
                 <td>{{$food->update_at}}</td>
                 <td>
                     <form action="{{route('food.destroy', $food->id)}}" method="post">
