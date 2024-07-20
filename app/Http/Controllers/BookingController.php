@@ -40,6 +40,11 @@ class BookingController extends Controller
             Booking::create($validated);
         });
 
+        DB::transaction(function () use ($validated) {
+            Booking::create($validated);
+        });
+
+        Booking::create($validated);
         return redirect()->route('booking.index')->with('message', 'Бронирование успешно создано!');
     }
 
