@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +19,8 @@
     </style>
 </head>
 <body class="hold-transition sidebar-mini">
+=======
+>>>>>>> 0bfbe1554d6e061a4edba81280d3c4dc09e368bc
 @extends('layouts.app')
 @section('content')
     <form action="{{route('client.update',$clients)}}" method="POST" enctype="multipart/form-data">
@@ -59,5 +62,6 @@
         <button type="submit" class="btn btn-info">Изменить</button>
     </form>
 @endsection
-</body>
-</html>
+
+@section('footer')
+@endsection

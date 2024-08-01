@@ -12,11 +12,11 @@
             </div>
             <div class="form-group">
                 <label for="number">Номер:</label>
-                <input type="text" id="number" name="number" class="form-control" required>
+                <input type="text" name="number" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="description">Подробности:</label>
-                <textarea id="description" name="description" class="form-control" rows="3" required></textarea>
+                <textarea id="description" name="description" class="form-control" rows="3"></textarea>
             </div>
             <div class="form-group">
                 <label for="capacity">Город:</label>
@@ -24,9 +24,7 @@
             </div>
             <div class="form-group">
                 <label for="restaurant_id">Ресторан:</label>
-
                 <select class ="form-select" name="restaurant_id" id="">
-
                     @foreach($restourants as $restourant)
                         <option value="{{$restourant->id}}">{{$restourant->name}}</option>
                     @endforeach
@@ -34,7 +32,7 @@
 
             </div>
             <button type="submit" class="form-control btn btn-primary">Добавить новое место</button>
+            <input type="submit" value="Create" class="btn btn-primary form-control">
         </form>
     </div>
 @endsection
-

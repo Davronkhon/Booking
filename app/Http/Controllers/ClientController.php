@@ -8,71 +8,67 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-public function index()
-{
-    $users = Client::with('user')->get();
+    public function index()
+    {
+        $clients = Client::with('user')->get();
+        return view('client.index', compact('clients' ));
+    }
 
-    $clients = Client::all();
-return view('client.index', compact('clients', 'users'));
-}
+    public function create()
+    {
+        $users = User::all();
+        $restaurants = Restaurant::all();
+        return view('client.create', compact( 'restaurants', 'users'));
+    }
 
-public function create()
-{
-    $users = User::all();
-    $restaurants = Restaurant::all();
-return view('client.create', compact( 'restaurants', 'users'));
-}
+    public function store(Request $request)
+    {
+        //dd($request);
+        $clin = $request->validate([
+            'name' => 'required|string',
+            'surname' => 'required|string',
+            'phone' => 'required|string',
+            'user_id' => 'required|exists:users,id',
+            'restaurant_id' => 'required|exists:restaurants,id'
+        ]);
 
-public function store(Request $request)
-{
-$request->validate([
-'name' => 'required|string',
-'surname' => 'required|string',
-'phone' => 'required|string',
-'user_id' => 'required|exists:users,id',
-'restaurant_id' => 'required|exists:restaurants,id'
-]);
+        Client::create($clin);
+        return redirect()->route('client.index')->with('success', 'Client created successfully');
+    }
 
-Client::create($request->all());
+    public function show($id)
+    {
+        $clients = Client::findOrFail($id);
+        return view('client.show', compact('clients'));
+    }
 
-return redirect('/client')->with('success', 'Client created successfully');
-}
+    public function edit($id)
+    {
+        $restaurants = Restaurant::all();
+        $users = User::all();
+        $clients = Client::findOrFail($id);
+        return view('client.edit', compact('clients', 'users', 'restaurants'));
+    }
 
-public function show($id)
-{
-$clients = Client::findOrFail($id);
-return view('client.show', compact('clients'));
-}
+    public function update(Request $request, $id)
+    {
+        $clin = $request->validate([
+            'name' => 'required|string',
+            'surname' => 'required|string',
+            'phone' => 'required|string',
+            'user_id' => 'required|exists:users,id',
+            'restaurant_id' => 'required|exists:restaurants,id'
+        ]);
 
-public function edit($id)
-{
-    $restaurants = Restaurant::all();
-    $users = User::all();
-$clients = Client::findOrFail($id);
-return view('client.edit', compact('clients', 'users', 'restaurants'));
-}
+        $clients = Client::findOrFail($id);
+        $clients->update($clin);
+        return redirect('/client')->with('success', 'Client updated successfully');
+    }
 
-public function update(Request $request, $id)
-{
-$request->validate([
-'name' => 'required|string',
-'surname' => 'required|string',
-'phone' => 'required|string',
-'user_id' => 'required|exists:users,id',
-'restaurant_id' => 'required|exists:restaurants,id'
-]);
-
-$clients = Client::findOrFail($id);
-$clients->update($request->all());
-
-return redirect('/client')->with('success', 'Client updated successfully');
-}
-
-public function destroy($id)
-{
-$clients = Client::findOrFail($id);
-$clients->delete();
-
-return redirect('/client')->with('success', 'Client deleted successfully');
-}
+    public function destroy($id)
+    {
+        $clients = Client::findOrFail($id);
+        $clients->delete();
+        return redirect('/client')->with('success', 'Client deleted successfully');
+    }
 }

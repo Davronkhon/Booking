@@ -6,59 +6,59 @@ use Illuminate\Http\Request;
 
 class FoodCategoryController extends Controller
 {
-public function index()
-{
-$foodcategory = FoodCategory::all();
-return view('foodcat.index', compact('foodcategory'));
-}
+    public function index()
+    {
+        $foodcats = FoodCategory::all();
+        return view('foodcat.index', compact('foodcats'));
+    }
 
-public function create()
-{
-return view('foodcat.create');
-}
+    public function create()
+    {
+        $foodcats = FoodCategory::all();
+        return view('foodcat.create', compact('foodcats'));
+    }
 
-public function store(Request $request)
-{
-$request->validate([
-'name' => 'required|string',
-'description' => 'required|string',
-]);
+    public function store(Request $request)
+    {
+        //dd($request);
+        $foodc = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+        FoodCategory::create($foodc);
+        return redirect()->route('foodcat.index')->with('success', 'Категория еды успешно добавлена');
+    }
 
-FoodCategory::create($request->all());
+    public function show($id)
+    {
+        $foodcats = FoodCategory::findOrFail($id);
+        return view('foodcat.show', compact('foodcats'));
+    }
 
-return redirect('/foodcat')->with('success', 'FoodCategories created successfully');
-}
+    public function edit($id)
+    {
+        $foodcat = FoodCategory::findOrFail($id);
+        return view('foodcat.edit', compact('foodcat'));
+    }
 
-public function show($id)
-{
-$foodcategory = FoodCategory::findOrFail($id);
-return view('foodcat.show', compact('foodcategory'));
-}
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+        'name' => 'required|string',
+        'description' => 'required|string',
+        ]);
 
-public function edit($id)
-{
-$foodcategory = FoodCategory::findOrFail($id);
-return view('foodcat.edit', compact('foodcategory'));
-}
+        $foodcats = FoodCategory::findOrFail($id);
+        $foodcats->update($request->all());
+        return redirect('/foodcat')->with('success', 'FoodCategory updated successfully');
+    }
 
-public function update(Request $request, $id)
-{
-$request->validate([
-'name' => 'required|string',
-'description' => 'required|string',
-]);
+    public function destroy($id)
+    {
+        $foodcats = FoodCategory::findOrFail($id);
+        $foodcats->delete();
+        return redirect('/foodcat')->with('success', 'FoodCategory deleted successfully');
+    }
 
-    $foodcategory = FoodCategory::findOrFail($id);
-    $foodcategory->update($request->all());
 
-return redirect('/foodcat')->with('success', 'FoodCategory updated successfully');
-}
-
-public function destroy($id)
-{
-    $foodcategory = FoodCategory::findOrFail($id);
-    $foodcategory->delete();
-
-return redirect('/foodcat')->with('success', 'FoodCategory deleted successfully');
-}
 }

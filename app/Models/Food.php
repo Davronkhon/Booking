@@ -11,14 +11,15 @@ class Food extends Model
     protected $fillable = ['food_category_id', 'restaurant_id', 'name', 'price', 'image',
         'description', 'time', 'is_active'];
 
+    public function foodCategory()
+    {
+        return $this->belongsTo(FoodCategory::class);
+    }
+
     public function restaurant()
     {
         return $this->belongsTo(Restaurant::class);
-    }
 
-    public function food_category()
-    {
-        return $this->belongsTo(FoodCategory::class);
     }
 
 }

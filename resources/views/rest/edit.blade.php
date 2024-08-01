@@ -1,8 +1,7 @@
-<!-- resources/views/rest/edit.blade.php -->
-
 @extends('layouts.app')
 
 @section('content')
+<<<<<<< HEAD
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -52,7 +51,22 @@
                         </form>
                     </div>
                 </div>
+=======
+    <div class="card-body">
+        @if(session('message'))
+            <div class="alert alert-success">
+                {{session('message')}}
+>>>>>>> 0bfbe1554d6e061a4edba81280d3c4dc09e368bc
             </div>
-        </div>
+        @endif
+        <form action="{{route('rest.update', $rest->id) }}" method="post">
+            @csrf
+            @method('PUT')
+            <label for="">Name</label>
+            <input type="text" class="form-control" id="" name="name" value="{{$rest->name}}">
+            <label for="">Description</label>
+            <input type="text" class="form-control" id="" name="description" value="{{$rest->description}}">
+            <input type="submit" value="Изменить" class="btn btn-primary form-control">
+        </form>
     </div>
 @endsection

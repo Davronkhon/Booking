@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
     <div class="card">
@@ -15,39 +15,29 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{ route('admin.clients.update', $clients->id) }}" method="POST">
+            <form action="{{ route('clients.update', $clients->id) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="form-group">
-                    <label for="date">Name:</label>
-                    <input type="date" class="form-control" name="name" value="{{$clients->name}}">
-                </div>
-                <div class="form-group">
-                    <label for="time">Surname:</label>
-                    <input type="time" class="form-control" name="surname" value="{{$clients->surname}}">
-                </div>
-                <div class="form-group">
-                    <label for="seats">Phone:</label>
-                    <input type="number" class="form-control" name="phone" value="{{$clients->phone}}">
-                </div>
-                <div class="card-body">
-                    <label for="exampleInputEmail1">User:</label>
-                    <select id="exampleInputEmail1" name="user_id">
-                        @foreach($users as $user)
-                            <option value="{{$user->id}}">{{$user->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="card-body">
-                    <label for="exampleInputEmail1">Restaurant:</label>
-                    <select id="exampleInputEmail1" name="restaurant_id">
-                        @foreach($restaurants as $restaurant)
-                            <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Сохранить</button>
-                <a href="{{ route('admin.clients.index') }}" class="btn btn-secondary">Отмена</a>
+                <label for="date">Name:</label>
+                <input type="date" class="form-control" name="name" value="{{$client->name}}">
+                <label for="time">Surname:</label>
+                <input type="time" class="form-control" name="surname" value="{{$client->surname}}">
+                <label for="seats">Phone:</label>
+                <input type="number" class="form-control" name="phone" value="{{$client->phone}}">
+                <label for="">User:</label>
+                <select id="" name="user_id">
+                    @foreach($users as $user)
+                        <option value="{{$user->id}}">{{$user->name}}</option>
+                    @endforeach
+                </select>
+                <label for="">Restaurant:</label>
+                <select id="" name="restaurant_id">
+                    @foreach($restaurants as $restaurant)
+                        <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
+                    @endforeach
+                </select>
+                <input type="submit" value="Сохранить" class="btn btn-primary form-control">
+                <a href="{{ route('clients.index') }}" class="btn btn-secondary">Отмена</a>
             </form>
         </div>
     </div>

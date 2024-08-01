@@ -9,18 +9,20 @@
         <thead>
         <tr>
             <th>#</th>
-            <th>Имя</th>
-            <th>Роль</th>
+            <th>UserName</th>
+            <th>Password</th>
+            <th>Role</th>
             <th>Email</th>
+            <th>Удалить</th>
+            <th>Изменить</th>
         </tr>
-        </thead>
-        <tbody>
         @foreach($users as $user)
             <tr>
                 <td>{{$loop->iteration}}</td>
-                <td>{{ $user->username }}</td>
-                <td>{{ $user->role }}</td>
-                <td>{{ $user->email }}</td>
+                <td>{{$user->username}}</td>
+                <td>{{$user->password}}</td>
+                <td>{{$user->role}}</td>
+                <td>{{$user->email}}</td>
                 <td>
                     <a href="{{ route('user.edit', $user->id) }}" class="btn btn-primary">Edit</a>
 

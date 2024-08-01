@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Place;
+use App\Models\place;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
@@ -70,3 +70,4 @@ class PlaceController extends Controller
         return redirect('/place')->with('success', 'Place deleted successfully');
     }
 }
+

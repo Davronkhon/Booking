@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('places', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('restaurant_id')->constrained();
             $table->string('name')->nullable(false);
             $table->unsignedInteger('number')->nullable(false);
             $table->text('description');
             $table->string('capacity')->nullable(false);
-            $table->foreignId('restaurant_id')->constrained();
             $table->timestamps();
         });
     }

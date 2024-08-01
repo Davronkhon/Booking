@@ -2,7 +2,7 @@
 // Distributed under an MIT license: https://codemirror.net/LICENSE
 
 // mode(s) for the sequence chart dsl's mscgen, xù and msgenny
-// For more information on mscgen, see the site of the original author:
+// For more information on mscgen, see the main of the original author:
 // http://www.mcternan.me.uk/mscgen
 //
 // This mode for mscgen and the two derivative languages were

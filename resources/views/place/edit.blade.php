@@ -27,7 +27,11 @@
                 <label for="restaurant_id">Restaurant ID:</label>
                 <select class="form-control" name="restaurant_id" id="">
                     @foreach($restourants as $restourant)
+<<<<<<< HEAD
                     <option value="{{$restourant->id}}">{{$restourant->name}}</option>
+=======
+                        <option value="{{$restourant->id}}">{{$restourant->name}}</option>
+>>>>>>> 0bfbe1554d6e061a4edba81280d3c4dc09e368bc
                     @endforeach
                 </select>
             </div>

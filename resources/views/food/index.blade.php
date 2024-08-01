@@ -10,6 +10,7 @@
     <table class="table">
         <tr>
             <th>#</th>
+<<<<<<< HEAD
             <th>Название</th>
             <th>Цена</th>
             <th>Фото</th>
@@ -20,6 +21,18 @@
             <th>Категория еды</th>
             <th>Удалить</th>
             <th>Изменить</th>
+=======
+            <th>name</th>
+            <th>price</th>
+            <th>image</th>
+            <th>description</th>
+            <th>time</th>
+            <th>is_active</th>
+            <th>restaurant_id</th>
+            <th>food_category_id</th>
+            <th>delete</th>
+            <th>update</th>
+>>>>>>> 0bfbe1554d6e061a4edba81280d3c4dc09e368bc
         </tr>
         @foreach($foods as $food)
             <tr>
@@ -31,7 +44,11 @@
                 <td>{{$food->time}}</td>
                 <td>{{$food->is_active}}</td>
                 <td>{{ optional($food->restaurant)->name }}</td>
+<<<<<<< HEAD
                 <td>{{ optional($food->food_category)->name }}</td>
+=======
+                <td>{{ optional($food->foodcategory)->name }}</td>
+>>>>>>> 0bfbe1554d6e061a4edba81280d3c4dc09e368bc
                 <td>
                     <form action="{{route('food.destroy', $food->id)}}" method="post">
                         @csrf

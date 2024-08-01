@@ -17,13 +17,13 @@ class UserController extends Controller
         $users = User::all();
         return view('user.create', compact('users'));
     }
-    public function destroy(User $users, $id)
+    public function destroy($id)
     {
         $users = User::findOrFail($id);
         $users->delete();
-        return redirect('/user')->with('success', 'Users updated succesfully');
+        return redirect('/user')->with('success', 'User deleted successfully');
     }
-    public function edit(User $users, $id)
+    public function edit($id)
     {
         $users = User::findOrFail($id);
         return view('user.edit', compact('users'));
@@ -31,19 +31,18 @@ class UserController extends Controller
     public function show(User $users, $id)
     {
         $users = User::findOrFail($id);
-        return view('user.index', compact('users'));
+        return view('user.show', compact('users'));
     }
     public function store(Request $request)
     {
-        $validated=$request->validate([
+        $users = $request->validate([
             'username' => 'required|string',
             'password' => 'required|string',
             'role' => 'required|string',
             'email' => 'required|string',
         ]);
-        // Сохранение данных
-        User::create($validated);
-       return redirect()->route('user.index')->with('message', 'Booking created successfully!');
+        User::create($users);
+        return redirect()->route('user.index')->with('success', 'User успешно добавлена');
     }
     public function update(Request $request, $id)
     {
@@ -58,5 +57,8 @@ class UserController extends Controller
         $users = User::findOrFail($id);
         $users->update($request->all());
 
+        $users = User::findOrFail($id);
+        $users->update($request->all());
+        return redirect('/user')->with('success', 'User updated successfulle');
     }
 }

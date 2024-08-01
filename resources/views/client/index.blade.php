@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    <h3>Таблица клиентов</h3>
+    <h3>Таблица clients</h3>
 @endsection
 
 @section('content')
@@ -9,13 +9,13 @@
     <table class="table">
         <tr>
             <th>#</th>
-            <th>Имя</th>
-            <th>Фамилия</th>
-            <th>Телефон</th>
-            <th>Ресторан</th>
-            <th>Пользователь</th>
-            <th>Удалить</th>
-            <th>Изменить</th>
+            <th>name</th>
+            <th>surname</th>
+            <th>phone</th>
+            <th>restaurant_id</th>
+            <th>user_id</th>
+            <th>delete</th>
+            <th>update</th>
         </tr>
         @foreach($clients as $client)
             <tr>
@@ -24,7 +24,6 @@
                 <td>{{$client->surname}}</td>
                 <td>{{$client->phone}}</td>
                 <td>{{$client->restaurants->name}}</td>
-                <td>{{$client->user->name}}</td>
                 <td>
                     <form action="{{route('client.destroy', $client->id)}}" method="post">
                         @csrf
@@ -41,6 +40,7 @@
             </tr>
         @endforeach
     </table>
+@endsection
 
-
+@section('footer')
 @endsection

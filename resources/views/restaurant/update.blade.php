@@ -1,70 +1,55 @@
-@extends('layouts.admin')
+@extends('layouts.app')
+
+@section('title')
+@endsection
 
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Редактировать бронирование #{{ $restaurant->id }}</h3>
+    @if(session('message'))
+        <div class="alert alert-danger">
+            {{session('message')}}
         </div>
-        <div class="card-body">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <form action="{{ route('admin.restaurant.update', $clients->id) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label for="date">Name:</label>
-                    <input type="date" class="form-control" name="name" value="{{$restauarnt->name}}">
-                </div>
-                <div class="form-group">
-                    <label for="time">Adress:</label>
-                    <input type="time" class="form-control" name="adress" value="{{$restaurant->adress}}">
-                </div>
-                <div class="form-group">
-                    <label for="seats">Phone:</label>
-                    <input type="number" class="form-control" name="phone" value="{{$restaurfant->phone}}">
-                </div>
-                <div class="form-group">
-                    <label for="seats">Email:</label>
-                    <input type="number" class="form-control" name="Email" value="{{$restaurfant->Email}}">
-                </div>
-                <div class="form-group">
-                    <label for="seats">Category:</label>
-                    <input type="number" class="form-control" name="Category" value="{{$restaurfant->Category}}">
-                </div>
-                <div class="form-group">
-                    <label for="seats">Category:</label>
-                    <input type="number" class="form-control" name="Category" value="{{$restaurant->Category}}">
-                </div>
-                <div class="form-group">
-                    <label for="seats">Actions:</label>
-                    <input type="number" class="form-control" name="Actions" value="{{$restaurfant->Actions}}">
-                </div>
-                <div class="card-body">
-                    <label for="exampleInputEmail1">User:</label>
-                    <select id="exampleInputEmail1" name="user_id">
-                        @foreach($users as $user)
-                            <option value="{{$user->id}}">{{$user->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="card-body">
-                    <label for="exampleInputEmail1">Restaurant:</label>
-                    <select id="exampleInputEmail1" name="restaurant_id">
-                        @foreach($restaurants as $restaurant)
-                            <option value="{{$restaurant->id}}">{{$restaurant->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Сохранить</button>
-                <a href="{{ route('admin.restaurant.index') }}" class="btn btn-secondary">Отмена</a>
-            </form>
+    @elseif(session('message2'))
+        <div class="alert alert-info">
+            {{session('message2')}}
         </div>
-    </div>
+    @endif
+    <a href="{{route('restaurant.create')}}" class="btn btn-primary">Добавить</a>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Rest_id</th>
+            <th>Удалить</th>
+            <th>Изменить</th>
+        </tr>
+        @foreach($restaurants as $restaurant)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $restaurant->name }}</td>
+                <td>{{ $restaurant->address }}</td>
+                <td>{{ $restaurant->phone }}</td>
+                <td>{{ $restaurant->email }}</td>
+                <td>{{ $restaurant->categories->name }}</td>
+                <td>
+                    <form action="{{route('restaurant.destroy', $restaurant->id)}}" method="post">
+                        @csrf
+                        @method('delete')
+                        <input type="submit" value="Удалить" class="btn btn-danger">
+                    </form>
+                </td>
+                <td>
+                    <form action="{{route('restaurant.edit', $restaurant->id)}}" method="get">
+                        @csrf
+                        <input type="submit" value="Изменить" class="btn btn-info">
+                    </form>
+                </td>
+            </tr>
+        @endforeach
+    </table>
+@endsection
+
+@section('footer')
 @endsection

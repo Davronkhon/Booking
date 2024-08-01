@@ -59,8 +59,8 @@
         <div class="card-body">
             <label for="exampleInputEmail1">Food_category:</label>
             <select id="exampleInputEmail1"class="form-control" name="food_category_id">
-                @foreach($food_categories as $food_category)
-                    <option value="{{$food_category->id}}">{{$food_category->name}}</option>
+                @foreach($foodcategories as $foodcategory)
+                    <option value="{{$foodcategory->id}}">{{$foodcategory->name}}</option>
                 @endforeach
             </select>
         </div>

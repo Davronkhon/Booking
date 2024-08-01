@@ -33,9 +33,10 @@
                     <i class="fas fa-users"></i>
                         <p>
                         Пользаватели
+                            </p>
                         <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
+
+
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{ route('user.index') }}" class="nav-link">
@@ -268,6 +269,6 @@
         </ul>
 
     </nav>
-    <!-- /.sidebar-menu -->
+е    <!-- /.sidebar-menu -->
 </div>
 <!-- /.sidebar -->

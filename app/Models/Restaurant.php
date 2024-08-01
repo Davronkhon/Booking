@@ -13,6 +13,6 @@ class Restaurant extends Model
 
     public function restCategory()
     {
-        return $this->belongsTo(restCategory::class);
+        return $this->belongsTo(RestCategory::class);
     }
 }

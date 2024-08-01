@@ -32,7 +32,7 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>{{$order->quantity}}</td>
-                <td>{{$order->orderdat}}</td>
+                <td>{{$order->date}}</td>
                 <td>{{$order->status}}</td>
                 <td>{{$order->booking->name}}</td>
                 <td>{{$order->food->name}}</td>

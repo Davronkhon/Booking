@@ -1,55 +1,36 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 
-@section('content')
-    <h1>Добавить ресторан</h1>
+ @section('title')
+     Добавление
+ @endsection
+ <!-- create -->
+ @section('content')
+     <div class="container">
+         @if(session('message'))
+             <div class="alert alert-success">
+                 {{session('message')}}
+             </div>
+         @endif
+         <form action="{{route('restaurant.store')}}" method="post" enctype="multipart/form-data">
+             @csrf
+             <label for="">name : </label>
+             <input type="text" name="name" class="form-control">
+             <label for="">address : </label>
+             <input type="text" name="address" class="form-control">
+             <label for="">phone : </label>
+             <input type="text" name="phone" class="form-control">
+             <label for="">email : </label>
+             <input type="email" name="email" class="form-control">
+             <label for="">rest_id : </label>
+             <select name="rest_category_id" id="" class="form-control">
+                 @foreach($categories as $category)
+                     <option value="{{$category->id}}">{{$category->name}}</option>
+                 @endforeach
+             </select><br>
+             <input type="submit" value="Добавить" class="btn btn-primary form-control">
+         </form>
+     </div>
+ @endsection
 
-    <form action="{{ route('restaurant.store') }}" method="POST">
-        @csrf
-
-        <div class="form-group">
-            <label for="">Название:</label>
-            <input type="text" name="name" class="form-control" placeholder="name">
-        </div>
-
-
-        <div class="form-group">
-            <label for="">Адресс:</label>
-            <input type="text" name="address" class="form-control" placeholder="name">
-        </div>
-
-    <div class="form-group">
-        <label for="">Телефон:</label><br>
-
-        <div class="input-group">
-            <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-phone"></i></span>
-            </div>
-            <input type="text" name="phone" class="form-control" placeholder="phone">
-        </div>
-    </div>
-
-        <div class="form-group">
-            <label for="email">Email:</label><br>
-            <input type="email" name="email" class="form-control"><br>
-        </div>
-
-
-        <label for="">Категория ресторанов: </label><br>
-        <select name="rest_category_id" id="" class="form-control">
-            @foreach($categories as $category)
-                <option value="{{$category->id}}">{{$category->name}}</option>
-            @endforeach
-        </select><br>
-
-        <button type="submit" class="btn btn-primary">Добавить ресторан</button>
-    </form>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-@endsection
+ @section('footer')
+ @endsection

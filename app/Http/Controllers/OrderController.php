@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
@@ -13,8 +12,10 @@ class OrderController extends Controller
     public function index()
     {
         $orders = Order::all();
-        return view('order.index', compact('orders'));
+       $bookings = Booking::with('orders' )->get();
+        return view('order.index', compact('bookings', 'orders'));
     }
+
     public function create()
     {
         $bookings = Booking::all();
@@ -22,45 +23,66 @@ class OrderController extends Controller
         $foods = Food::all();
         return view('order.create', compact('bookings', 'clients', 'foods'));
     }
-    public function destroy(Order $orders, $id)
+
+
+    public function destroy($id)
     {
         $orders = Order::findOrFail($id);
         $orders->delete();
+        return redirect('/order')->with('success', 'book');
     }
-    public function edit(Order $orders, $id)
+
+    public function edit($id)
     {
-        $orders = Order::findOrFail($id);
-        return view('order.edit', compact('orders'));
+        $order = Order::find($id);
+        if (!$order) {
+            return redirect()->route('order.index')->with('message', 'Order not found.');
+        }
+        $bookings = Booking::all();
+        $foods = Food::all();
+        $clients = Client::all();
+        return view('order.edit', compact('order', 'bookings', 'foods', 'clients'));
     }
-    public function show(Order $orders, $id)
+
+    public function show($id)
     {
         $orders = Order::findOrFail($id);
         return view('order.show', compact('orders'));
     }
+
     public function store(Request $request)
     {
-        $request->validate([
+        $order = $request->validate([
             'quantity' => 'required|string',
-            'order_dat' => 'required|string',
+            'date' => 'required|string',
             'status' => 'required|string',
-            'booking_id' => 'required|exists:users,id',
-            'food_id' => 'required|exists:restaurants,id',
-            'client_id' => 'required|exists:restaurants,id',
+            'booking_id' => 'required|exists:bookings,id',
+            'food_id' => 'required|exists:food,id',
+            'client_id' => 'required|exists:clients,id',
         ]);
 
-        Order::create($request->all());
+        $order['order_datetime'] = $order['date'];
+        unset($order['date']);
+        Order::create($order);
+
+        return redirect()->route('order.index')->with('success', 'Order');
+        Order::create($order);
+        return redirect()->route('order.index')->with('success', 'Order');
     }
+
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'surname' => 'required|string',
-            'phone' => 'required|string',
-            'user_id' => 'required|exists:users,id',
-            'restaurant_id' => 'required|exists:restaurants,id'
+        $order = $request->validate([
+            'quantity' => 'required|string',
+            'date' => 'required|string',
+            'status' => 'required|string',
+            'booking_id' => 'required|exists:bookings,id',
+            'food_id' => 'required|exists:food,id',
+            'client_id' => 'required|exists:clients,id'
         ]);
 
         $orders = Order::findOrFail($id);
-        $orders->update($request->all());
+        $orders->update($order);
+        return redirect('/order')->with('success', 'Order');
     }
 }

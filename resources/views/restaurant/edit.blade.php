@@ -11,6 +11,7 @@
                 {{session('message')}}
             </div>
         @endif
+<<<<<<< HEAD
         <form action="{{route('restaurant.index', $restaurants->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="">name : </label>
@@ -21,6 +22,18 @@
             <input type="text" name="phone" class="form-control" value="{{$restaurants->phone}}">
             <label for="">email : </label>
             <input type="email" name="email" class="form-control" value="{{$restaurants->email}}">
+=======
+        <form action="{{route('restaurant.update', $restaurant->id)}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <label for="">name : </label>
+            <input type="text" name="name" class="form-control" value="{{$restaurant->name}}">
+            <label for="">address : </label>
+            <input type="text" name="address" class="form-control" value="{{$restaurant->address}}">
+            <label for="">phone : </label>
+            <input type="text" name="phone" class="form-control" value="{{$restaurant->phone}}">
+            <label for="">email : </label>
+            <input type="email" name="email" class="form-control" value="{{$restaurant->email}}">
+>>>>>>> 0bfbe1554d6e061a4edba81280d3c4dc09e368bc
             <label for="">rest_id : </label>
             <select name="rest_id" id="" class="form-control">
                 @foreach($categories as $category)
